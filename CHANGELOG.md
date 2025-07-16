@@ -1,3 +1,6 @@
+## 2.4.0
++ `await ThanPkg.platform.getWifiAddressList()` add new scanner
+
 ## 2.3.0
 
 ## Added

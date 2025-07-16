@@ -110,11 +110,11 @@ class _MyAppState extends State<MyApp> {
               ),
         body: Placeholder(),
         floatingActionButton: FloatingActionButton(
-          onPressed: _test,
-          // onPressed: () {
-          //   ThanPkg.platform.launch(
-          //       '/home/thancoder/Downloads/mmbook/သရက်စိုက်ပျိုးနည်း.pdf');
-          // },
+          // onPressed: _test,
+          onPressed: () async{
+            final res = await ThanPkg.platform.getWifiAddressList();
+            print(res);
+          },
           child: Icon(Icons.get_app),
         ),
       ),
