@@ -1,40 +1,26 @@
 class MapServices {
-  static String getString(dynamic mapValue, {String defaultValue = ''}) {
-    return mapValue ?? defaultValue;
+  static String getString(
+    Map<String, dynamic> map,
+    List<String> keys, {
+    String defaultValue = '',
+  }) {
+    return get<String>(map, keys, defaultValue: defaultValue);
   }
 
   static double getDouble(
-    dynamic mapValue, {
+    Map<String, dynamic> map,
+    List<String> keys, {
     double defaultValue = 0.0,
   }) {
-    final res = mapValue;
-    if (res == null) return defaultValue;
-    if (res is String) {
-      if (double.tryParse(res) != null) {
-        return double.parse(res);
-      }
-    }
-    if (res is int) {
-      return res.toDouble();
-    }
-    return res;
+    return get<double>(map, keys, defaultValue: defaultValue);
   }
 
   static int getInt(
-    dynamic mapValue, {
+    Map<String, dynamic> map,
+    List<String> keys, {
     int defaultValue = 0,
   }) {
-    final res = mapValue;
-    if (res == null) return defaultValue;
-    if (res is String) {
-      if (int.tryParse(res) != null) {
-        return int.parse(res);
-      }
-    }
-    if (res is double) {
-      return res.toInt();
-    }
-    return res;
+    return get<int>(map, keys, defaultValue: defaultValue);
   }
 
   static T get<T>(
@@ -44,24 +30,35 @@ class MapServices {
   }) {
     dynamic current = map;
     for (var key in keys) {
+      // if (current is Map<String, dynamic>) {
+      //   print(current);
+      //   print(current.containsKey(key));
+      // }
+
       if (current is Map<String, dynamic> && current.containsKey(key)) {
-        current = map[key];
-      } else {
-        return defaultValue;
+        current = current[key];
       }
     }
+    // string ကိုယူမှာ
     if (T == String && current is int) {
-      current = int.parse(current as String);
+      current = current.toString();
     }
     if (T == String && current is double) {
-      current = double.parse(current as String);
+      current = current.toString();
     }
+    // int ကိုယူမှာ
     if (T == int && current is String) {
-      current = int.parse(current);
+      if (int.tryParse(current) != null) {
+        current = int.parse(current);
+      }
     }
+    // double ကိုယူမှာ
     if (T == double && current is String) {
-      current = double.parse(current);
+      if (double.tryParse(current) != null) {
+        current = double.parse(current);
+      }
     }
+    // custom type အတွက်မရေးထားဘူး
 
     return current is T ? current : defaultValue;
   }

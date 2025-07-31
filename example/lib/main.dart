@@ -34,10 +34,18 @@ class _MyAppState extends State<MyApp> {
     if (Platform.isAndroid) {
       await ThanPkg.android.app.toggleKeepScreenOn(isKeep: true);
     }
-    
+
     MapServices.get<String>({}, ['name'], defaultValue: '');
     MapServices.get<int>({}, ['num'], defaultValue: 1);
     MapServices.get<double>({}, ['height'], defaultValue: 0.0);
+    //or
+    MapServices.get({}, ['keys'], defaultValue: ''); // -> type - auto cast
+    MapServices.get({
+      'main': {'key': 'than'}
+    }, [
+      'main',
+      'key'
+    ], defaultValue: 'default name');
 
     // ThanPkg.appUtil.getParseMinutes(minutes);
     // ThanPkg.appUtil.copyText(text);
@@ -111,9 +119,19 @@ class _MyAppState extends State<MyApp> {
         body: Placeholder(),
         floatingActionButton: FloatingActionButton(
           // onPressed: _test,
-          onPressed: () async{
-            final res = await ThanPkg.platform.getWifiAddressList();
-            print(res);
+          onPressed: () async {
+            // final res = await ThanPkg.platform.getWifiAddressList();
+            // final res = MapServices.getString({'name':5},['name'],defaultValue: 'default name');
+            // final res = MapServices.getDouble({},['name'],defaultValue: 0.5);
+            // final res = MapServices.getInt({},['name'],defaultValue: 5);
+            // final res =
+            // MapServices.get({'name': 9.5}, ['name'], defaultValue: 'name');
+            // final res = MapServices.get({
+            //   'main': {'key': 'than'}
+            // }, [
+            //   'main',
+            //   'keyk'
+            // ], defaultValue: 'default name');
           },
           child: Icon(Icons.get_app),
         ),

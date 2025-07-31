@@ -1,3 +1,8 @@
+## 2.4.1
+
+## Fixed 
+- `MapServices:class -> fixed`
+
 ## 2.4.0
 + `await ThanPkg.platform.getWifiAddressList()` add new scanner
 
