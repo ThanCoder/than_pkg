@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
 
   void _test() async {
     try {
+
       // extension
       DateTime.now().toParseTime();
       DateTime.now().toTimeAgo();
@@ -120,6 +121,8 @@ class _MyAppState extends State<MyApp> {
         floatingActionButton: FloatingActionButton(
           // onPressed: _test,
           onPressed: () async {
+            final res = await ThanPkg.platform.getAppExternalPath();
+            print(res);
             // final res = await ThanPkg.platform.getWifiAddressList();
             // final res = MapServices.getString({'name':5},['name'],defaultValue: 'default name');
             // final res = MapServices.getDouble({},['name'],defaultValue: 0.5);
