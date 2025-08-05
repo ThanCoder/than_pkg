@@ -1,20 +1,20 @@
 enum ScreenOrientationTypes {
-  Portrait,
-  Landscape;
-}
+  portrait,
+  landscape;
 
-extension ScreenOrientationTypesExtension on ScreenOrientationTypes {
   static ScreenOrientationTypes getType(String name) {
-    if (ScreenOrientationTypes.Landscape.name == name) {
-      return ScreenOrientationTypes.Landscape;
+    if (landscape.name == name) {
+      return landscape;
     }
-    return ScreenOrientationTypes.Portrait;
+    return portrait;
   }
 
   static String getName(ScreenOrientationTypes type) {
-    if (ScreenOrientationTypes.Landscape.name == type.name) {
-      return ScreenOrientationTypes.Landscape.name;
+    if (landscape.name == type.name) {
+      return landscape.name;
     }
-    return ScreenOrientationTypes.Portrait.name;
+    return portrait.name;
   }
 }
+
+

@@ -4,7 +4,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:than_pkg/android_pkg/android_pkg.dart';
 import 'package:than_pkg/enums/screen_orientation_types.dart';
 import 'package:than_pkg/linux_pkg/linux_pkg.dart';
-import 'package:than_pkg/interfaces/than_pkg_interface.dart';
+import 'package:than_pkg/platforms/than_pkg_interface.dart';
 import 'package:than_pkg/platforms/than_pkg_android.dart';
 import 'package:than_pkg/platforms/than_pkg_linux.dart';
 import 'package:than_pkg/types/src_dist_type.dart';
@@ -77,7 +77,6 @@ class ThanPkg implements ThanPkgInterface {
       {required String outDirPath,
       required List<String> pdfPathList,
       int iconSize = 300}) {
-    // TODO: implement genPdfCover
     throw UnimplementedError();
   }
 
@@ -568,4 +567,5 @@ class ThanPkg implements ThanPkgInterface {
     // TODO: implement genVideoCover2
     throw UnimplementedError();
   }
+  
 }

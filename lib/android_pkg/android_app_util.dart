@@ -134,13 +134,13 @@ class AndroidAppUtil {
   Future<ScreenOrientationTypes?> checkOrientation() async {
     final res = await _channel.invokeMethod<String>('$_name/checkOrientation');
     if (res == null) return null;
-    return ScreenOrientationTypesExtension.getType(res);
+    return ScreenOrientationTypes.getType(res);
   }
 
   Future<ScreenOrientationTypes?> getOrientation() async {
     final res = await _channel.invokeMethod<String>('$_name/checkOrientation');
     if (res == null) return null;
-    return ScreenOrientationTypesExtension.getType(res);
+    return ScreenOrientationTypes.getType(res);
   }
 
   Future<String> getPlatformVersion() async {
