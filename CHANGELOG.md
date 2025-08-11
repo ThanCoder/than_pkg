@@ -1,5 +1,8 @@
 ## 2.4.2
 
+## Added
+- `MapServices.getBool`
+
 ## Fixed
 - `Some Error Fixed`
 

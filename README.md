@@ -1,6 +1,12 @@
 ### Add Map Services
 
 ```Dart
+//new
+MapServices.getBool({}, ['name'])
+MapServices.getInt({}, ['name'])
+MapServices.getString({}, ['name'])
+MapServices.getDouble({}, ['name'])
+//old
 MapServices.get<String>({}, ['name'], defaultValue: '');
 MapServices.get<int>({}, ['num'], defaultValue: 1);
 MapServices.get<double>({}, ['height'], defaultValue: 0.0);

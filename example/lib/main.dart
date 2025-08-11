@@ -121,7 +121,8 @@ class _MyAppState extends State<MyApp> {
         floatingActionButton: FloatingActionButton(
           // onPressed: _test,
           onPressed: () async {
-            final res = await ThanPkg.platform.getAppExternalPath();
+            // final res = await ThanPkg.platform.getAppExternalPath();
+            final res = MapServices.getBool({'name':134534}, ['name']);
             print(res);
             // final res = await ThanPkg.platform.getWifiAddressList();
             // final res = MapServices.getString({'name':5},['name'],defaultValue: 'default name');

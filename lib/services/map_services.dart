@@ -23,6 +23,14 @@ class MapServices {
     return get<int>(map, keys, defaultValue: defaultValue);
   }
 
+  static bool getBool(
+    Map<String, dynamic> map,
+    List<String> keys, {
+    bool defaultValue = false,
+  }) {
+    return get<bool>(map, keys, defaultValue: defaultValue);
+  }
+
   static T get<T>(
     Map<String, dynamic> map,
     List<String> keys, {
@@ -30,11 +38,6 @@ class MapServices {
   }) {
     dynamic current = map;
     for (var key in keys) {
-      // if (current is Map<String, dynamic>) {
-      //   print(current);
-      //   print(current.containsKey(key));
-      // }
-
       if (current is Map<String, dynamic> && current.containsKey(key)) {
         current = current[key];
       }
