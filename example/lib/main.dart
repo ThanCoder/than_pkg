@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:than_pkg/enums/screen_orientation_types.dart';
 import 'package:than_pkg/than_pkg.dart';
 import 'package:than_pkg/types/src_dist_type.dart';
 
@@ -55,7 +56,6 @@ class _MyAppState extends State<MyApp> {
 
   void _test() async {
     try {
-
       // extension
       DateTime.now().toParseTime();
       DateTime.now().toTimeAgo();
@@ -122,8 +122,9 @@ class _MyAppState extends State<MyApp> {
           // onPressed: _test,
           onPressed: () async {
             // final res = await ThanPkg.platform.getAppExternalPath();
-            final res = MapServices.getBool({'name':134534}, ['name']);
-            print(res);
+            final res = MapServices.getBool({'name': 134534}, ['name']);
+            ThanPkg.android.app
+                .requestOrientation(type: ScreenOrientationTypes.landscape);
             // final res = await ThanPkg.platform.getWifiAddressList();
             // final res = MapServices.getString({'name':5},['name'],defaultValue: 'default name');
             // final res = MapServices.getDouble({},['name'],defaultValue: 0.5);

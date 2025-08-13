@@ -126,7 +126,7 @@ object AppUtil {
 			//orientation
 			"requestOrientation" -> {
 				try {
-					val type = call.argument<String>("type") ?: "Portrait"
+					val type = call.argument<String>("type") ?: "portrait"
 					val isReverse = call.argument<Boolean>("reverse") ?: false
 					activity?.let {
 						requestOrientation(it, isReverse = isReverse, type = type)
@@ -311,20 +311,20 @@ object AppUtil {
 	private fun checkOrientation(context: Context): String {
 		val orientation = context.resources.configuration.orientation
 		return if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-			"Portrait"
+			"portrait"
 		} else {
-			"Landscape"
+			"landscape"
 		}
 	}
 
 	private fun requestOrientation(ctx: Activity, type: String, isReverse: Boolean = false) {
-		if (type == "Portrait") {
+		if (type == "portrait") {
 			if (isReverse) {
 				ctx.requestedOrientation = SCREEN_ORIENTATION_UNSPECIFIED
 			} else {
 				ctx.requestedOrientation = SCREEN_ORIENTATION_UNSPECIFIED
 			}
-		} else if (type == "Landscape") {
+		} else if (type == "landscape") {
 			if (isReverse) {
 				ctx.requestedOrientation = SCREEN_ORIENTATION_REVERSE_LANDSCAPE
 			} else {

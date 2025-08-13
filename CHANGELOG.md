@@ -1,37 +1,52 @@
+## 2.4.3
+
+## Fixed
+
+- `ThanPkg.android.app.requestOrientation`
+
 ## 2.4.2
 
 ## Added
+
 - `MapServices.getBool`
 
 ## Fixed
+
 - `Some Error Fixed`
 
 ## 2.4.1
 
-## Fixed 
+## Fixed
+
 - `MapServices:class -> fixed`
 
 ## 2.4.0
-+ `await ThanPkg.platform.getWifiAddressList()` add new scanner
+
+- `await ThanPkg.platform.getWifiAddressList()` add new scanner
 
 ## 2.3.0
 
 ## Added
-+ `MapServices.get<String>({}, ['name'], defaultValue: '');`
+
+- `MapServices.get<String>({}, ['name'], defaultValue: '');`
 
 ## 2.1.0
+
 ## Added
-+ `ThanPkg.appUtil.getParseMinutes(minutes);`
-+ `ThanPkg.appUtil.copyText(text);`
-+ `ThanPkg.appUtil.pasteText();`
-+ `await ThanPkg.appUtil.clearImageCache();`
+
+- `ThanPkg.appUtil.getParseMinutes(minutes);`
+- `ThanPkg.appUtil.copyText(text);`
+- `ThanPkg.appUtil.pasteText();`
+- `await ThanPkg.appUtil.clearImageCache();`
 
 ## Changed
+
 - `await ThanPkg.windowManagerensureInitialized();` -> `await ThanPkg.instance.init();`
 
 ## 2.0.0
 
 ## Added
+
 - Add Extension classes
 - `DatetimeExtension`
 - `DoubleExtension`
@@ -43,16 +58,19 @@
 ## 1.6.7
 
 ## Added
+
 - `ThanPkg.android.app.launch`
 - `ThanPkg.android.app.launchUrl`
 - `ThanPkg.android.app.launchFile`
 
 ## Fixed
+
 - `ThanPkg.platform.launch`
 
 ## 1.6.6
 
 ## Added
+
 - `ThanPkg.platform.genVideoThumbnail`
 - `ThanPkg.platform.genPdfThumbnail`
 - `ThanPkg.android.thumbnail.genVideoThumbnail2`
@@ -61,6 +79,7 @@
 ## 1.6.5
 
 ## Added
+
 - `ThanPkg.linux.app.*`
 - `ThanPkg.linux.app.launch`
 - `ThanPkg.platform.launch`
@@ -68,14 +87,17 @@
 ## 1.6.4
 
 ## Added
+
 - `ThanPkg.android.app.getOrientation` old method -> `ThanPkg.android.app.checkOrientation`
 
 ## Fixed
+
 - `ThanPkg.android.app.requestOrientation` fixed
 
 ## 1.6.3
 
 ## Fixed
+
 - `ThanPkg.android.wifi.*` fixed
 
 ## 1.6.2
@@ -83,17 +105,20 @@
 ### Added
 
 ## Linux
+
 - Added `ThanPkg.linux`
+
 ```Dart
 ThanPkg.linux.thumbnail.*;
 ThanPkg.linux.wifi.*
 ```
 
 ## Android
+
 - ThanPkg.android.app
 
 ```Dart
-//android xml permission needed -> loop up README.md 
+//android xml permission needed -> loop up README.md
 Future<void> openPdfWithIntent({required String path})
 Future<void> openVideoWithIntent({required String path})
 Future<void> installApk({required String path})
