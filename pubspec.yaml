@@ -1,13 +1,12 @@
 name: than_pkg
-description: android native plugin.it is my personal lib and you can use.this is
-  my first lib.
-version: 2.4.3
+description: My personal Flutter plugin with support for both Android and Linux platforms.
+version: 3.0.0
 homepage: https://github.com/ThanCoder/than_pkg_flutter_lib
 repository: https://github.com/ThanCoder/than_pkg_flutter_lib
 publish_to: null
 
 environment:
-  sdk: ^3.6.1
+  sdk: ^3.8.1
   flutter: ">=3.3.0"
 
 dependencies:

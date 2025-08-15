@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 
 class AndroidThumbnail {
   static final AndroidThumbnail thumbnail = AndroidThumbnail._();
@@ -13,7 +13,7 @@ class AndroidThumbnail {
   // new methods
 
   Future<void> genVideoThumbnail2({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
@@ -25,7 +25,7 @@ class AndroidThumbnail {
   }
 
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {

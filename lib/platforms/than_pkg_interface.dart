@@ -1,6 +1,5 @@
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:than_pkg/enums/screen_orientation_types.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 
 abstract class ThanPkgInterface {
   Future<List<String>> getWifiAddressList();
@@ -17,16 +16,10 @@ abstract class ThanPkgInterface {
     required List<String> videoPathList,
     int iconSize = 300,
   });
-  //android only
-  Future<ScreenOrientationTypes?> checkScreenOrientation();
-  Future<void> requestScreenOrientation({
-    required ScreenOrientationTypes type,
-    bool reverse = false,
-  });
-  Future<Map<String, dynamic>> getAndroidDeviceInfo();
+
   Future<bool> isStoragePermissionGranted();
   Future<void> requestStoragePermission();
-  // Future<void> checkAndRequestPackageInstallPermission();
+
   Future<String?> getDeviceId();
   Future<String?> getPlatformVersion();
   Future<String?> getLocalIpAddress();
@@ -35,11 +28,9 @@ abstract class ThanPkgInterface {
   Future<String?> getAppRootPath();
   Future<String?> getAppExternalPath();
 
-  Future<String?> getAppFilePath();
   Future<bool> isAppSystemThemeDarkMode();
   Future<bool> isAppInternetConnected();
-  Future<int> getAppBatteryLevel();
-  Future<List<Map>> getInstalledApps();
+  Future<int?> getAppBatteryLevel();
   Future<String?> getWifiSSID();
 
   Future<PackageInfo> getPackageInfo();
@@ -47,14 +38,16 @@ abstract class ThanPkgInterface {
 
   //new methods
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   });
 
   Future<void> genVideoThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   });
+
+  Future<bool> isInternetConnected();
 }

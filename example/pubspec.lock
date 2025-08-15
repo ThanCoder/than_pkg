@@ -362,7 +362,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.4.1"
+    version: "2.4.3"
   timeago:
     dependency: "direct main"
     description:
@@ -428,5 +428,5 @@ packages:
     source: hosted
     version: "0.4.3"
 sdks:
-  dart: ">=3.8.0 <4.0.0"
+  dart: ">=3.8.1 <4.0.0"
   flutter: ">=3.19.0"

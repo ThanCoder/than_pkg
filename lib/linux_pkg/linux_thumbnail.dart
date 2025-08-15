@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 
 class LinuxThumbnail {
   static final LinuxThumbnail thumbnail = LinuxThumbnail._();
@@ -11,13 +11,13 @@ class LinuxThumbnail {
 
   //new methods
   Future<void> genVideoThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
     try {
       for (final video in pathList) {
-        final imageFile = File(video.dist);
+        final imageFile = File(video.dest);
         if (isOverride == false) {
           if (await imageFile.exists()) {
             continue;
@@ -27,7 +27,7 @@ class LinuxThumbnail {
           '-i', video.src,
           '-ss', '00:00:05', // Capture at 5 seconds
           '-vframes', '1',
-          imageFile.path
+          imageFile.path,
         ]);
       }
     } catch (e) {
@@ -36,13 +36,13 @@ class LinuxThumbnail {
   }
 
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
     try {
       for (final pdfPath in pathList) {
-        final imageFile = File(pdfPath.dist);
+        final imageFile = File(pdfPath.dest);
 
         if (isOverride == false && await imageFile.exists()) {
           continue;
@@ -53,7 +53,7 @@ class LinuxThumbnail {
           '1',
           '-singlefile',
           pdfPath.src,
-          imageFile.path.replaceAll('.png', '')
+          imageFile.path.replaceAll('.png', ''),
         ]);
       }
     } catch (e) {
@@ -80,7 +80,7 @@ class LinuxThumbnail {
           '-i', videoPath,
           '-ss', '00:00:05', // Capture at 5 seconds
           '-vframes', '1',
-          outImageFile.path
+          outImageFile.path,
         ]);
       }
     } catch (e) {
@@ -102,8 +102,14 @@ class LinuxThumbnail {
         if (await File(oldImagePath).exists()) {
           continue;
         }
-        await Process.run('pdftoppm',
-            ['-png', '-f', '1', '-singlefile', pdfPath, outImageFile.path]);
+        await Process.run('pdftoppm', [
+          '-png',
+          '-f',
+          '1',
+          '-singlefile',
+          pdfPath,
+          outImageFile.path,
+        ]);
       }
     } catch (e) {
       debugPrint("genPdfCover: ${e.toString()}");
@@ -111,7 +117,9 @@ class LinuxThumbnail {
   }
 
   Future<void> generateVideoRandomThumbnail(
-      String videoPath, String outputPath) async {
+    String videoPath,
+    String outputPath,
+  ) async {
     int? duration = await getVideoDuration(videoPath);
     if (duration == null || duration < 1) {
       debugPrint("Invalid duration. Cannot generate thumbnail.");
@@ -124,8 +132,15 @@ class LinuxThumbnail {
         "00:${(randomTime ~/ 60).toString().padLeft(2, '0')}:${(randomTime % 60).toString().padLeft(2, '0')}";
 
     try {
-      ProcessResult result = await Process.run('ffmpeg',
-          ['-i', videoPath, '-ss', timeFormat, '-vframes', '1', outputPath]);
+      ProcessResult result = await Process.run('ffmpeg', [
+        '-i',
+        videoPath,
+        '-ss',
+        timeFormat,
+        '-vframes',
+        '1',
+        outputPath,
+      ]);
 
       if (result.exitCode == 0) {
         debugPrint("Thumbnail generated at $timeFormat: $outputPath");
@@ -149,7 +164,7 @@ class LinuxThumbnail {
         '-show_entries',
         'format=duration',
         '-v',
-        'quiet'
+        'quiet',
       ]);
 
       if (result.exitCode == 0) {

@@ -1,3 +1,18 @@
+## 3.0.0
+
+## Added
+
+- `ThanPkg.platform.isInternetConnected` -> android,linux
+- `ThanPkg.linux.app.isInternetConnected` -> android,linux
+
+## Changed
+
+- `SrcDistType` -> `SrcDestType`
+
+## Fixed
+
+- `Some Error Fixed`
+
 ## 2.4.3
 
 ## Fixed

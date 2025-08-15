@@ -1,4 +1,33 @@
-### Add Map Services
+## My personal Flutter plugin with support for both Android and Linux platforms
+
+## ThanPkg V3.0.0
+
+# Needed lib for linux
+
+```bash
+sudo apt install net-tools  // wifi
+sudo apt install poppler-utils //pdf thumbnail
+sudo apt install ffmpeg //video thumbnail
+```
+
+# Platforms Methods
+
+- `ThanPkg.platform.*`
+- `ThanPkg.platform.checkScreenOrientation`
+- `ThanPkg.platform.genPdfThumbnail`
+- `ThanPkg.platform.genVideoThumbnail`
+- `ThanPkg.platform.getAppBatteryLevel`
+- `ThanPkg.platform.getDeviceId`
+
+# Linux
+
+- `ThanPkg.linux.*`
+
+# Android
+
+- `ThanPkg.android.*`
+
+### Map Services
 
 ```Dart
 //new
@@ -12,7 +41,7 @@ MapServices.get<int>({}, ['num'], defaultValue: 1);
 MapServices.get<double>({}, ['height'], defaultValue: 0.0);
 ```
 
-### Added Methods
+### Methods
 
 ```Dart
 ThanPkg.appUtil.getParseMinutes(minutes);
@@ -44,21 +73,22 @@ PlatformExtension.isMobile();
 TextEditingController().selectAll();
 ```
 
-### Thumbnil
+### Thumbnail for linux,android
 
 ```Dart
 await ThanPkg.platform.genPdfThumbnail(pathList: [
-SrcDistType(src: '$path/Download/1-50.pdf', dist: '$path/test.png'),
+SrcDestType(src: '$path/Download/1-50.pdf', dist: '$path/test.png'),
 ]);
 
 await ThanPkg.platform.genVideoThumbnail(pathList: [
-SrcDistType(
+SrcDestType(
     src: '$path/Download/catch.mp4', dist: '$path/catch-video.png'),
 ]);
 ```
 
-### launch
+### Launch
 
+- `ThanPkg.android.app.launch`
 - `ThanPkg.linux.app.launch`
 - `ThanPkg.platform.launch`
 
@@ -96,7 +126,7 @@ await ThanPkg.android.app.hideFullScreen();
 }
 ```
 
-### Added
+### Android Manifest
 
 ```xml
 <application>
@@ -135,7 +165,7 @@ Future<int> getPdfPageCount
 final filePath = await ThanPkg.android.camera.openCamera();
 ```
 
-### Android Permission (All Version)
+### Android Storage Permission (All Version)
 
 ```Dart
 if (!await ThanPkg.android.permission.isStoragePermissionGranted()) {
@@ -160,14 +190,6 @@ Future<void> requestStoragePermission()
 Future<void> requestPackageInstallPermission()
 Future<void> requestCameraPermission()
 Future<void> requestLocationPermission()
-```
-
-# needed lib from linux
-
-```bash
-sudo apt install net-tools  // wifi
-sudo apt install poppler-utils //pdf thumbnail
-sudo apt install ffmpeg //video thumbnail
 ```
 
 # Android && linux
@@ -218,11 +240,13 @@ await ThanPkg.platform.getWifiAddress();
 # android AndroidManifest
 
 ```xml
+<uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
 ```

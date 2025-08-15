@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:than_pkg/android_pkg/android_pkg.dart';
-import 'package:than_pkg/enums/screen_orientation_types.dart';
 import 'package:than_pkg/linux_pkg/linux_pkg.dart';
 import 'package:than_pkg/platforms/than_pkg_interface.dart';
 import 'package:than_pkg/platforms/than_pkg_android.dart';
 import 'package:than_pkg/platforms/than_pkg_linux.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 import 'package:than_pkg/utils/app_util.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -41,9 +41,22 @@ class ThanPkg implements ThanPkgInterface {
   static LinuxPkg get linux => LinuxPkg.linux;
   static AppUtil get appUtil => AppUtil.instance;
 
-  Future<void> init() async {
+  Future<void> init({bool isShowDebugLog = false}) async {
+    ThanPkg.isShowDebugLog = isShowDebugLog;
     if (Platform.isLinux) {
       await windowManager.ensureInitialized();
+    }
+  }
+
+  // debug
+  static bool isShowDebugLog = false;
+
+  static void showDebugLog(String message, {String? tag}) {
+    if (!isShowDebugLog) return;
+    if (tag != null) {
+      debugPrint('[$tag]: $message');
+    } else {
+      debugPrint(message);
     }
   }
 
@@ -71,12 +84,14 @@ class ThanPkg implements ThanPkgInterface {
   ///outDirPath -> `/storage/emulated/0/PdfCovers/sample.png`
   ///
   /// This function is asynchronous and returns a [Future] that completes when all covers are generated.
-
+  /// **Deprecated:** Use `generatePdfCover` instead.
+  @Deprecated('Use genPdfThumbnail ')
   @override
-  Future<void> genPdfCover(
-      {required String outDirPath,
-      required List<String> pdfPathList,
-      int iconSize = 300}) {
+  Future<void> genPdfCover({
+    required String outDirPath,
+    required List<String> pdfPathList,
+    int iconSize = 300,
+  }) {
     throw UnimplementedError();
   }
 
@@ -185,19 +200,8 @@ class ThanPkg implements ThanPkgInterface {
   ///
   /// This function returns a unique identifier for the device.
   /// The method of obtaining the device ID may vary based on
-  /// the platform (Android, iOS, etc.).
+  /// the platform (Android, Linux, etc.).
   ///
-  /// ### Returns:
-  /// - A [Future] that resolves to a [String] containing the device ID.
-  /// - Returns `null` if the device ID cannot be determined.
-  ///
-  /// ### Example Usage:
-  /// ```dart
-  /// String? deviceId = await getDeviceId();
-  /// print("Device ID: $deviceId");
-  /// ```
-  ///
-  /// This method should be implemented to provide actual functionality.
   @override
   Future<String?> getDeviceId() {
     // TODO: Implement getDeviceId method.
@@ -333,6 +337,8 @@ class ThanPkg implements ThanPkgInterface {
   /// ```
   ///
   /// This method should be implemented to provide actual functionality.
+  /// /// **Deprecated:** Use `genVideoThumbnail` instead.
+  @Deprecated('Use genVideoThumbnail ')
   @override
   Future<void> genVideoCover({
     required String outDirPath,
@@ -343,86 +349,6 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-  /// Retrieves information about the Android device.
-  ///
-  /// This function fetches various details about the Android device, such as model,
-  /// manufacturer, OS version, and other related information, and returns it as a
-  /// [Map<String, dynamic>].
-  ///
-  /// ### Returns:
-  /// - A [Future<Map<String, dynamic>>] that completes with a map containing device
-  ///   information, where the keys are strings (e.g., 'model', 'manufacturer') and
-  ///   the values are dynamic, representing the corresponding information.
-  ///
-  /// ### Example Usage:
-  /// ```dart
-  /// Map<String, dynamic> deviceInfo = await getAndroidDeviceInfo();
-  /// print('Device Model: ${deviceInfo['model']}');
-  /// print('OS Version: ${deviceInfo['version']}');
-  /// ```
-  ///
-  /// This method should be implemented to fetch and return the device information.
-  @override
-  Future<Map<String, dynamic>> getAndroidDeviceInfo() async {
-    // TODO: Implement getAndroidDeviceInfo method.
-    throw UnimplementedError();
-  }
-
-  /// Requests the screen orientation to be set to the specified type.
-  ///
-  /// This function requests the device screen orientation to be changed to the
-  /// specified [ScreenOrientationTypes] value. The [reverse] parameter determines
-  /// whether the orientation change should be reversed (default is `false`).
-  ///
-  /// ### Parameters:
-  /// - [type] (required): A [ScreenOrientationTypes] value representing the desired
-  ///   screen orientation to be set (e.g., portrait, landscape).
-  /// - [reverse] (optional): A `bool` value that indicates whether the orientation
-  ///   change should be reversed. Defaults to `false` (no reversal).
-  ///
-  /// ### Returns:
-  /// - A [Future<void>] that completes when the orientation request is made.
-  ///
-  /// ### Example Usage:
-  /// ```dart
-  /// await requestScreenOrientation(type: ScreenOrientationTypes.portrait); // Set to portrait
-  /// await requestScreenOrientation(type: ScreenOrientationTypes.landscape, reverse: true); // Reverse to landscape
-  /// ```
-  ///
-  /// This method should be implemented to handle the screen orientation request logic.
-  @override
-  Future<void> requestScreenOrientation(
-      {required ScreenOrientationTypes type, bool reverse = false}) async {
-    // TODO: Implement requestScreenOrientation method.
-    throw UnimplementedError();
-  }
-
-  /// Checks the current screen orientation.
-  ///
-  /// This function checks the current screen orientation of the device and returns
-  /// the corresponding orientation type as an enum value of [ScreenOrientationTypes].
-  /// It returns `null` if the orientation can't be determined.
-  ///
-  /// ### Returns:
-  /// - A [Future<ScreenOrientationTypes?>] that completes with the current screen orientation,
-  ///   or `null` if the orientation is undetermined.
-  ///
-  /// ### Example Usage:
-  /// ```dart
-  /// ScreenOrientationTypes? orientation = await checkScreenOrientation();
-  /// if (orientation != null) {
-  ///   // Handle the orientation logic here
-  /// } else {
-  ///   // Handle case when orientation can't be determined
-  /// }
-  /// ```
-  ///
-  /// This method should be implemented to provide the actual screen orientation check logic.
-  @override
-  Future<ScreenOrientationTypes?> checkScreenOrientation() async {
-    // TODO: Implement checkScreenOrientation method.
-    throw UnimplementedError();
-  }
 
   /// Returns the root directory path of the app.
   ///
@@ -484,40 +410,6 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-  /// Returns the file path where the app can store files.
-  ///
-  /// This method retrieves the app's designated file storage directory,
-  /// which may vary based on the platform.
-  ///
-  /// **Platform-specific behavior:**
-  /// - On Android, this could be the app's internal storage directory.
-  ///
-  /// Returns:
-  /// - A `Future<String?>` resolving to the file storage path.
-  /// - Throws an `UnimplementedError` if the method is not implemented.
-  ///
-  /// **Example Output**
-  ///
-  /// ```data/user/0/com.example.than_pkg_example/files```
-  ///
-  /// Example:
-  /// ```dart
-  /// String? path = await getAppFilePath();
-  /// if (path != null) {
-  ///   print("App file path: $path");
-  /// }
-  /// ```
-  @override
-  Future<String?> getAppFilePath() {
-    // TODO: implement getAppFilePath
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Map>> getInstalledApps() {
-    // TODO: implement getInstalledApps
-    throw UnimplementedError();
-  }
 
   @override
   Future<String?> getWifiSSID() {
@@ -532,7 +424,7 @@ class ThanPkg implements ThanPkgInterface {
   }
 
   @override
-  Future<int> getAppBatteryLevel() {
+  Future<int?> getAppBatteryLevel() {
     // TODO: implement getAppBatteryLevel
     throw UnimplementedError();
   }
@@ -550,7 +442,7 @@ class ThanPkg implements ThanPkgInterface {
 
   @override
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) {
@@ -560,12 +452,17 @@ class ThanPkg implements ThanPkgInterface {
 
   @override
   Future<void> genVideoThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) {
     // TODO: implement genVideoCover2
     throw UnimplementedError();
   }
-  
+
+  @override
+  Future<bool> isInternetConnected() {
+    // TODO: implement isInternetConnected
+    throw UnimplementedError();
+  }
 }

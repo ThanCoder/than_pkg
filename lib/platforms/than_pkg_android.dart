@@ -1,6 +1,5 @@
-import 'package:than_pkg/enums/screen_orientation_types.dart';
 import 'package:than_pkg/than_pkg.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgAndroid extends ThanPkg {
   @override
@@ -8,10 +7,6 @@ class ThanPkgAndroid extends ThanPkg {
     return await ThanPkg.android.wifi.getWifiSSID();
   }
 
-  @override
-  Future<List<Map>> getInstalledApps() async {
-    return await ThanPkg.android.app.getInstalledAppsList();
-  }
 
   @override
   Future<int> getAppBatteryLevel() async {
@@ -29,11 +24,6 @@ class ThanPkgAndroid extends ThanPkg {
   }
 
   @override
-  Future<String> getAppFilePath() async {
-    return await ThanPkg.android.app.getFilesDir();
-  }
-
-  @override
   Future<String> getAppRootPath() async {
     return await ThanPkg.android.app.getExternalFilesDir();
   }
@@ -41,20 +31,6 @@ class ThanPkgAndroid extends ThanPkg {
   @override
   Future<String> getAppExternalPath() async {
     return await ThanPkg.android.app.getAppExternalPath();
-  }
-
-  @override
-  Future<ScreenOrientationTypes?> checkScreenOrientation() async {
-    return await ThanPkg.android.app.checkOrientation();
-  }
-
-  @override
-  Future<void> requestScreenOrientation({
-    required ScreenOrientationTypes type,
-    bool reverse = false,
-  }) async {
-    await ThanPkg.android.app
-        .requestOrientation(type: type, isReverse: reverse);
   }
 
   @override
@@ -68,11 +44,6 @@ class ThanPkgAndroid extends ThanPkg {
       videoPathList: videoPathList,
       iconSize: iconSize,
     );
-  }
-
-  @override
-  Future<Map<String, dynamic>> getAndroidDeviceInfo() async {
-    return await ThanPkg.android.app.getDeviceInfo();
   }
 
   @override
@@ -96,10 +67,11 @@ class ThanPkgAndroid extends ThanPkg {
   }
 
   @override
-  Future<void> genPdfCover(
-      {required String outDirPath,
-      required List<String> pdfPathList,
-      int iconSize = 300}) async {
+  Future<void> genPdfCover({
+    required String outDirPath,
+    required List<String> pdfPathList,
+    int iconSize = 300,
+  }) async {
     await ThanPkg.android.thumbnail.genPdfCoverList(
       outDirPath: outDirPath,
       pdfPathList: pdfPathList,
@@ -147,7 +119,7 @@ class ThanPkgAndroid extends ThanPkg {
 
   @override
   Future<void> genVideoThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
@@ -160,7 +132,7 @@ class ThanPkgAndroid extends ThanPkg {
 
   @override
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
@@ -169,5 +141,10 @@ class ThanPkgAndroid extends ThanPkg {
       isOverride: isOverride,
       iconSize: iconSize,
     );
+  }
+
+  @override
+  Future<bool> isInternetConnected() async {
+    return ThanPkg.android.app.isInternetConnected();
   }
 }

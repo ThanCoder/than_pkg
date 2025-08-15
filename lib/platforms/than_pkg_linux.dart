@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:than_pkg/than_pkg.dart';
-import 'package:than_pkg/types/src_dist_type.dart';
+import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgLinux extends ThanPkg {
   @override
@@ -67,7 +67,7 @@ class ThanPkgLinux extends ThanPkg {
 
   @override
   Future<void> genVideoThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
@@ -80,7 +80,7 @@ class ThanPkgLinux extends ThanPkg {
 
   @override
   Future<void> genPdfThumbnail({
-    required List<SrcDistType> pathList,
+    required List<SrcDestType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) async {
@@ -89,5 +89,20 @@ class ThanPkgLinux extends ThanPkg {
       isOverride: isOverride,
       iconSize: iconSize,
     );
+  }
+
+  @override
+  Future<bool> isInternetConnected() async {
+    return ThanPkg.linux.app.isInternetConnected();
+  }
+
+  @override
+  Future<int?> getAppBatteryLevel() async {
+    return await ThanPkg.linux.app.getAppBatteryLevel();
+  }
+
+  @override
+  Future<String?> getDeviceId() async {
+    return await ThanPkg.linux.app.getDeviceId();
   }
 }

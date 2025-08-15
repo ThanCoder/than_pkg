@@ -1,1 +1,1 @@
-export 'src_dist_type.dart';
+export 'src_dest_type.dart';
