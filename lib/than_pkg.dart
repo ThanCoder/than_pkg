@@ -383,20 +383,10 @@ class ThanPkg implements ThanPkgInterface {
   /// outside the app's internal storage.
   ///
   /// **Platform-specific behavior:**
-  /// - On Android, it corresponds to `getExternalFilesDir()`.
+  /// 
+  /// - On Android, /storage/emulated/0.
   /// - On Linux `/home/[your pc name]`
   /// - On iOS, external storage is not available in the same way.
-  ///
-  /// Returns:
-  /// - A `Future<String?>` resolving to the external storage path.
-  /// - Throws an `UnimplementedError` if the method is not implemented.
-  ///
-  /// Example:
-  /// ```dart
-  /// String? path = await getAppExternalPath();
-  /// if (path != null) {
-  ///   print("External storage path: $path");
-  /// }
   /// ```
   @override
   Future<String?> getAppExternalPath() {

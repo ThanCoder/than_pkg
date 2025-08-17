@@ -107,18 +107,31 @@ class AndroidAppUtil {
         false;
   }
 
+  ///
+  ///context.filesDir ⇒ /data/data/<your.package.name>/files/
+  ///
   Future<String> getFilesDir() async {
     return await _channel.invokeMethod<String>('$_name/getFilesDir') ?? '';
   }
 
+  ///`context.getExternalFilesDir(null)`
+  ///
+  ///`storage/emulated/0/Android/data/com.example.myapp/files`
+  ///
+  ///External storage, app-only	No (Android 4.4+ onwards)
+  ///
   Future<String> getExternalFilesDir() async {
     return await _channel.invokeMethod<String>('$_name/getExternalFilesDir') ??
         '';
   }
 
+  ///
+  ////storage/emulated/0
+  ///
   Future<String> getAppExternalPath() async {
-    return await _channel.invokeMethod<String>('$_name/getAppExternalPath') ??
-        '';
+    // return await _channel.invokeMethod<String>('$_name/getAppExternalPath') ??
+    //     '';
+    return '/storage/emulated/0';
   }
 
   Future<void> requestOrientation({
@@ -149,10 +162,13 @@ class AndroidAppUtil {
   }
 
   Future<void> toggleKeepScreenOn({required bool isKeep}) async {
-    await _channel
-        .invokeMethod('$_name/toggleKeepScreenOn', {'is_keep': isKeep});
+    await _channel.invokeMethod('$_name/toggleKeepScreenOn', {
+      'is_keep': isKeep,
+    });
   }
-
+  ///
+  ///`Settings.Secure.ANDROID_ID`
+  ///
   Future<String> getDeviceId() async {
     return await _channel.invokeMethod<String>('$_name/getDeviceId') ?? '';
   }
