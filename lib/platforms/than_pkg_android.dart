@@ -14,11 +14,6 @@ class ThanPkgAndroid extends ThanPkg {
   }
 
   @override
-  Future<bool> isAppInternetConnected() async {
-    return await ThanPkg.android.app.isInternetConnected();
-  }
-
-  @override
   Future<bool> isAppSystemThemeDarkMode() async {
     return await ThanPkg.android.app.isDarkModeEnabled();
   }

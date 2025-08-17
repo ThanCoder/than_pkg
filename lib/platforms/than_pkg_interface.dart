@@ -29,7 +29,6 @@ abstract class ThanPkgInterface {
   Future<String?> getAppExternalPath();
 
   Future<bool> isAppSystemThemeDarkMode();
-  Future<bool> isAppInternetConnected();
   Future<int?> getAppBatteryLevel();
   Future<String?> getWifiSSID();
 

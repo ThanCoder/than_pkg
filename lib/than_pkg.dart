@@ -417,11 +417,6 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-  @override
-  Future<bool> isAppInternetConnected() {
-    // TODO: implement isAppInternetConnected
-    throw UnimplementedError();
-  }
 
   @override
   Future<int?> getAppBatteryLevel() {
