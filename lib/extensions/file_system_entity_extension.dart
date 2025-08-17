@@ -5,16 +5,15 @@ import 'package:than_pkg/extensions/double_extension.dart';
 
 extension FileSystemEntityExtension on FileSystemEntity {
   String getName({bool withExt = true}) {
+    final name = path.split('/').last;
     if (!withExt) {
-      // ext မပါဘူး
-      final name = uri.pathSegments.last;
       return name.split('.').first;
     }
-    return uri.pathSegments.last;
+    return name;
   }
 
   String get getExt {
-    return uri.pathSegments.last.split('.').last;
+    return path.split('/').last;
   }
 
   bool get isDirectory {

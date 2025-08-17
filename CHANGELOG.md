@@ -1,3 +1,9 @@
+## 3.0.4
+
+## Fixed
+
+- `Some Error Fixed`
+
 ## 3.0.3
 
 ## Fixed
