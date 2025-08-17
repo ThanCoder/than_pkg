@@ -356,7 +356,7 @@ class ThanPkg implements ThanPkgInterface {
   /// to store or retrieve files.
   ///
   /// **Platform-specific behavior:**
-  /// - On Android `/storage/emulated/0`
+  /// - On Android `storage/emulated/0/Android/data/com.example.myapp/files`
   /// - On Linux `Directory.current.path`
   ///
   /// Returns:

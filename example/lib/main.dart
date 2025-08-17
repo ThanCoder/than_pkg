@@ -69,10 +69,8 @@ class _MyAppState extends State<MyApp> {
         floatingActionButton: FloatingActionButton(
           // onPressed: _test,
           onPressed: () async {
-            final res = await ThanPkg.platform.isInternetConnected();
-            ThanPkg.platform.getAppExternalPath();
-            ThanPkg.android.app.getAppExternalPath();
-            ThanPkg.android.app.getDeviceId();
+            final res = await ThanPkg.platform.getAppExternalPath();
+            print(res);
             // final res = await ThanPkg.platform.getAppExternalPath();
             // final res = MapServices.getBool({'name': 134534}, ['name']);
             // ThanPkg.android.app
