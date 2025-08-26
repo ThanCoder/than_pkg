@@ -21,15 +21,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isFullScreen = false;
-  String imageUri = '';
-  final TextEditingController textEditingController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
     init();
   }
+
+  bool isFullScreen = false;
+  String imageUri = '';
+  final TextEditingController textEditingController = TextEditingController();
 
   void init() async {
     if (Platform.isAndroid) {

@@ -15,6 +15,7 @@ export 'extensions/index.dart';
 export 'than_pkg_lib.dart';
 export 'utils/index.dart';
 export 'services/index.dart';
+export 't_database/index.dart';
 
 class ThanPkg implements ThanPkgInterface {
   //singleton

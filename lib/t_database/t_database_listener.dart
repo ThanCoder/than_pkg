@@ -1,0 +1,3 @@
+mixin TDatabaseListener {
+  void onDatabaseChanged();
+}

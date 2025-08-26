@@ -40,6 +40,135 @@ map.getDouble(['level']);
 map.getInt(['age']);
 ```
 
+### TJsonDatabase
+
+```Dart
+class Person {}
+
+class PerDB extends TJsonDatabase<Person> {
+  PerDB({required super.path});
+
+  @override
+  Person fromMap(Map<String, dynamic> map) {
+    // TODO: implement fromMap
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic> toMap(Person value) {
+    // TODO: implement toMap
+    throw UnimplementedError();
+  }
+}
+final db = PerDB(path: 'path');
+```
+
+### TDatabase
+
+```Dart
+class Person {}
+
+class PerIO extends DataIO {
+  @override
+  Future<String> read(String source) {
+    // TODO: implement read
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> write(String source, String data) {
+    // TODO: implement write
+    throw UnimplementedError();
+  }
+}
+// or you can use TJsonConverter
+class PerConverter2 extends JsonConverter<Person>{
+  @override
+  Person from(Map<String, dynamic> value) {
+    // TODO: implement from
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic> to(Person value) {
+    // TODO: implement to
+    throw UnimplementedError();
+  }
+}
+
+class PerConverter extends TConverter<Person, Map<String, dynamic>> {
+  @override
+  Person from(Map<String, dynamic> value) {
+    // TODO: implement from
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic> to(Person value) {
+    // TODO: implement to
+    throw UnimplementedError();
+  }
+}
+
+class PerDB extends TDatabase<Person> {
+  PerDB({
+    required super.io,
+    required super.converter,
+    required super.databasePath,
+  });
+
+  @override
+  Future<void> add(Person value) {
+    // TODO: implement add
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> delete(Person value) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Person>> getAll() {
+    // TODO: implement getAll
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> update(Person value) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+}
+
+final db = PerDB(io: PerIO(), converter: PerConverter(), databasePath: '');
+```
+
+### TDatabase Listener
+
+```Dart
+class _MyAppState extends State<MyApp> with TDatabaseListener {
+  @override
+  void initState() {
+    db.addListener(this);
+    super.initState();
+    init();
+  }
+
+  @override
+  void dispose() {
+    db.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onDatabaseChanged() {
+    // TODO: implement onDatabaseChanged
+  }
+}
+```
+
 ### Map Services
 
 ```Dart

@@ -1,3 +1,14 @@
+## 3.5.0
+
+## Added
+
+- `TJsonDatabase<T>`
+- `DataIO`
+- `JsonIO`
+- `TDatabase<T>`
+- `TConverter<T,V>`
+- `JsonConverter<T>`
+
 ## 3.1.4
 
 ## Added
