@@ -14,7 +14,7 @@ import 'package:window_manager/window_manager.dart';
 export 'extensions/index.dart';
 export 'than_pkg_lib.dart';
 export 'utils/index.dart';
-export 'services/map_services.dart';
+export 'services/index.dart';
 
 class ThanPkg implements ThanPkgInterface {
   //singleton
@@ -349,7 +349,6 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-
   /// Returns the root directory path of the app.
   ///
   /// This method retrieves the root directory where the app has access
@@ -383,7 +382,7 @@ class ThanPkg implements ThanPkgInterface {
   /// outside the app's internal storage.
   ///
   /// **Platform-specific behavior:**
-  /// 
+  ///
   /// - On Android, /storage/emulated/0.
   /// - On Linux `/home/[your pc name]`
   /// - On iOS, external storage is not available in the same way.
@@ -400,13 +399,11 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-
   @override
   Future<String?> getWifiSSID() {
     // TODO: implement getWifiSSID
     throw UnimplementedError();
   }
-
 
   @override
   Future<int?> getAppBatteryLevel() {

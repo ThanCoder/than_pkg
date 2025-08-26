@@ -1,3 +1,10 @@
+## 3.1.4
+
+## Added
+
+- `TMap`
+- `TMapExtension`
+
 ## 3.0.4
 
 ## Fixed

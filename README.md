@@ -1,6 +1,6 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V3.0.0
+## ThanPkg V3.1.4
 
 # Needed lib for linux
 
@@ -26,6 +26,19 @@ sudo apt install ffmpeg //video thumbnail
 # Android
 
 - `ThanPkg.android.*`
+
+### TMap
+
+```Dart
+//class
+TMap
+// extension
+final map = {'name': 'than', 'age': 29};
+map.getString(['name-'], def: 'i def');
+map.getBool(['isTrue']);
+map.getDouble(['level']);
+map.getInt(['age']);
+```
 
 ### Map Services
 
