@@ -12,22 +12,24 @@ class LinuxWifiUtil {
     try {
       // ifconfig && ip neigh
       // scan ifconfig
-      ProcessResult result = await Process.run('ifconfig', []);
-      RegExp ipRegex = RegExp(r'(192\.168\.\d+\.\d+)');
-      if (result.exitCode == 0) {
-        final res = ipRegex.allMatches(result.stdout.toString()).map((e) {
+      ProcessResult ifconfig = await Process.run('ifconfig', ['wlp2s0']);
+      // host finder
+      RegExp ipRegex = RegExp(r'(\d+\.\d+\.\d+\.\d+)');
+
+      if (ifconfig.exitCode == 0) {
+        final res = ipRegex.allMatches(ifconfig.stdout.toString()).map((e) {
           return e.group(0);
         }).toList();
-        list = res.cast<String>();
+        list.addAll(res.cast<String>());
       }
       // scan ip neigh
       ProcessResult ipRes = await Process.run('ip', ['neigh']);
       final res = ipRegex.allMatches(ipRes.stdout.toString()).map((e) {
-          return e.group(0);
-        }).toList();
+        return e.group(0);
+      }).toList();
       for (var ip in res) {
-        if(ip != null && ip.isNotEmpty){
-          list.insert(0, ip);
+        if (ip != null && ip.isNotEmpty) {
+          list.add(ip);
         }
       }
     } catch (e) {

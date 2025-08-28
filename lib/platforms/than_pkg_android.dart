@@ -84,11 +84,6 @@ class ThanPkgAndroid extends ThanPkg {
   }
 
   @override
-  Future<String?> getWifiAddress() async {
-    return await ThanPkg.android.wifi.getWifiAddress();
-  }
-
-  @override
   Future<List<String>> getWifiAddressList() async {
     return await ThanPkg.android.wifi.getWifiAddressList();
   }

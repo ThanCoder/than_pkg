@@ -1,3 +1,9 @@
+## 3.5.1
+
+## Fixed
+
+- `ThanPkg.platform.getWifiAddressList`
+
 ## 3.5.0
 
 ## Added

@@ -23,7 +23,6 @@ abstract class ThanPkgInterface {
   Future<String?> getDeviceId();
   Future<String?> getPlatformVersion();
   Future<String?> getLocalIpAddress();
-  Future<String?> getWifiAddress();
   Future<void> toggleKeepScreen({required bool isKeep});
   Future<String?> getAppRootPath();
   Future<String?> getAppExternalPath();

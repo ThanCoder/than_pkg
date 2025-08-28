@@ -141,12 +141,6 @@ class ThanPkg implements ThanPkgInterface {
     throw UnimplementedError();
   }
 
-  @override
-  Future<String?> getWifiAddress() {
-    // TODO: implement getWifiAddress
-    throw UnimplementedError();
-  }
-
   /// Opens a given URL in the default web browser or app.
   ///
   /// This function attempts to launch the specified URL using the
