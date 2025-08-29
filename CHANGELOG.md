@@ -1,3 +1,9 @@
+## 3.6.0
+
+## Added
+
+- `FileExtension`
+
 ## 3.5.1
 
 ## Fixed

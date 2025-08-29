@@ -108,7 +108,7 @@ class AndroidAppUtil {
   }
 
   ///
-  ///context.filesDir ⇒ /data/data/<your.package.name>/files/
+  ///context.filesDir ⇒ /data/data/[your.package.name]/files/
   ///
   Future<String> getFilesDir() async {
     return await _channel.invokeMethod<String>('$_name/getFilesDir') ?? '';

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:than_pkg/than_pkg.dart';
 
-extension FileSystemEntityExtension on FileSystemEntity {
+extension FileExtension on File {
   String getName({bool withExt = true}) {
     final name = path.split('/').last;
     if (!withExt) {
