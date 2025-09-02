@@ -8,11 +8,15 @@ import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.BatteryManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.view.View
 import android.view.Window
@@ -24,6 +28,7 @@ import androidx.annotation.RequiresApi
 import com.example.than_pkg.R
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
+import java.util.concurrent.Executors
 
 
 object AppUtil {
@@ -31,6 +36,62 @@ object AppUtil {
 	fun callCheck(call: MethodCall, result: Result, context: Context, activity: Activity?) {
 		val method = call.method.replace("appUtil/", "")
 		when (method) {
+//			apk
+			"getInstalledApps" ->{
+				ApkUtil.getInstalledApps(context = context, onLoaded = {list ->
+					result.success(list)
+				}, onError = {msg ->
+
+					result.error("ERROR", msg, null)
+				})
+			}
+			"getAppIcon" -> {
+				val packageName = call.argument<String>("packageName")
+				if (packageName != null) {
+					result.success(ApkUtil.getAppIconBase64(context, packageName))
+				} else {
+					result.error("INVALID", "packageName is required", null)
+				}
+			}
+			"getApkSize" -> {
+				val packageName = call.argument<String>("packageName")
+				if(packageName == null) {
+					result.error("ERROR","packageName not found",null)
+					return
+				}
+				val path = ApkUtil.getApkSize(context, packageName = packageName)
+				result.success(path)
+			}
+			"exportApk" -> {
+				val packageName = call.argument<String>("packageName")
+				val savedPath = call.argument<String>("savedPath")
+				if(packageName == null) {
+					result.error("ERROR","packageName not found",null)
+					return
+				}
+				if(savedPath == null) {
+					result.error("ERROR","savedPath not found",null)
+					return
+				}
+				val path = ApkUtil.exportApk(context, packageName = packageName,savedPath=savedPath)
+				result.success(path)
+			}
+//			old
+			"getInstalledAppsList" -> {
+				try {
+					val packageManager = context.packageManager
+					val packages = packageManager?.getInstalledApplications(0)?.map {
+						mapOf(
+							"packageName" to it.packageName,
+							"appName" to packageManager.getApplicationLabel(it).toString()
+						)
+					}
+					result.success(packages)
+				} catch (err: Exception) {
+					result.error("ERROR", err.toString(), err)
+				}
+			}
+//			others
 			"openUrl" -> {
 				try {
 					val url = call.argument<String>("url") ?: ""
@@ -53,20 +114,7 @@ object AppUtil {
 				result.success(true)
 			}
 
-			"getInstalledAppsList" -> {
-				try {
-					val packageManager = context.packageManager
-					val packages = packageManager?.getInstalledApplications(0)?.map {
-						mapOf(
-							"packageName" to it.packageName,
-							"appName" to packageManager.getApplicationLabel(it).toString()
-						)
-					}
-					result.success(packages)
-				} catch (err: Exception) {
-					result.error("ERROR", err.toString(), err)
-				}
-			}
+
 
 			"getBatteryLevel" -> {
 				try {
@@ -415,4 +463,8 @@ object AppUtil {
 			(flags and fullscreenFlags) == fullscreenFlags
 		}
 	}
+
+
+
+
 }

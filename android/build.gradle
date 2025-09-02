@@ -9,7 +9,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.7.3")
+//        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath ('com.android.tools.build:gradle:8.1.4') // AGP ကို downgrade လုပ်
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
@@ -27,7 +28,7 @@ apply plugin: "kotlin-android"
 android {
     namespace = "com.example.than_pkg"
 
-    compileSdk = 35
+    compileSdk = 36
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -44,7 +45,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
 
     dependencies {

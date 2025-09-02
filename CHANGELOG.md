@@ -1,3 +1,9 @@
+## 3.7.0
+
+## Added
+
+- `ThanPkg.android.app.getInstalledAppsList`
+
 ## 3.6.0
 
 ## Added

@@ -1,6 +1,31 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V3.1.4
+## ThanPkg V3.7.0
+
+## Android App List
+
+```Dart
+final appList = await ThanPkg.android.app.getInstalledAppsList();
+
+final app = appList.first;
+Text('appName: ${app.appName}'),
+Text('packageName: ${app.packageName}'),
+Text('versionName: ${app.versionName}'),
+Text('versionCode: ${app.versionCode}'),
+Text('Size: ${app.size!.getSizeLabel()}'),
+IconButton(
+    onPressed: () async {
+      final outfile =
+          await ThanPkg.platform.getAppExternalPath();
+      await app.export('$outfile/${app.appName}.apk');
+      debugPrint('saved');
+    },
+    icon: Icon(Icons.save))
+SizedBox(
+width: 50,
+height: 50,
+child: Image.memory(app.coverData!)),
+```
 
 # Needed lib for linux
 
@@ -27,7 +52,7 @@ sudo apt install ffmpeg //video thumbnail
 
 - `ThanPkg.android.*`
 
-### TMap
+## TMap
 
 ```Dart
 //class
@@ -383,12 +408,16 @@ await ThanPkg.platform.getWifiAddress();
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    tools:ignore="ScopedStorage" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    tools:ignore="QueryAllPackagesPermission" />
 
 ```

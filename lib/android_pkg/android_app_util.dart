@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 import 'package:than_pkg/enums/screen_orientation_types.dart';
+import 'package:than_pkg/types/index.dart';
 
 class AndroidAppUtil {
   static final AndroidAppUtil app = AndroidAppUtil._();
@@ -11,6 +13,54 @@ class AndroidAppUtil {
 
   final _channel = const MethodChannel('than_pkg');
   final _name = 'appUtil';
+
+  ///
+  /// Installed apps list (with apkPath)
+  ///
+  Future<List<InstalledApp>> getInstalledAppsList() async {
+    final res =
+        await _channel.invokeMethod<List>('$_name/getInstalledApps') ?? [];
+    return res
+        .map((map) => InstalledApp.fromMap(Map<String, dynamic>.from(map)))
+        .toList();
+  }
+
+  ///
+  /// AppIcon one APK by packageName
+  ///
+  Future<Uint8List?> getAppIcon({required String packageName}) async {
+    final base64Icon = await _channel.invokeMethod<String>(
+      "$_name/getAppIcon",
+      {"packageName": packageName},
+    );
+    if (base64Icon == null) return null;
+    final bytes = base64Decode(base64Icon);
+    return bytes;
+  }
+
+  ///
+  /// AppIcon one APK by packageName
+  ///
+  Future<int?> getApkSize({required String packageName}) async {
+    final size = await _channel.invokeMethod<int>("$_name/getApkSize", {
+      "packageName": packageName,
+    });
+    if (size == null) return null;
+    return size;
+  }
+
+  ///
+  /// Export one APK by package name
+  ///
+  Future<void> exportApk({
+    required String packageName,
+    required String savedPath,
+  }) async {
+    await _channel.invokeMethod('$_name/exportApk', {
+      "packageName": packageName,
+      "savedPath": savedPath,
+    });
+  }
 
   ///
   /// auto choose file and url
@@ -87,12 +137,6 @@ class AndroidAppUtil {
     return await _channel.invokeMethod<bool>('$_name/isFullScreen') ?? false;
   }
 
-  Future<List<Map<String, dynamic>>> getInstalledAppsList() async {
-    final res =
-        await _channel.invokeMethod<List>('$_name/getInstalledAppsList') ?? [];
-    return res.map((map) => Map<String, dynamic>.from(map)).toList();
-  }
-
   Future<int> getBatteryLevel() async {
     return await _channel.invokeMethod<int>('$_name/getBatteryLevel') ?? 0;
   }
@@ -166,6 +210,7 @@ class AndroidAppUtil {
       'is_keep': isKeep,
     });
   }
+
   ///
   ///`Settings.Secure.ANDROID_ID`
   ///
