@@ -5,18 +5,18 @@ import android.app.Activity
 import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.BatteryManager
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
 import android.view.View
 import android.view.Window
@@ -25,10 +25,10 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.than_pkg.R
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
 import java.util.concurrent.Executors
+import androidx.core.net.toUri
 
 
 object AppUtil {
@@ -36,6 +36,11 @@ object AppUtil {
 	fun callCheck(call: MethodCall, result: Result, context: Context, activity: Activity?) {
 		val method = call.method.replace("appUtil/", "")
 		when (method) {
+//			cache
+			"getExternalCachePath" ->{
+				val path = context.externalCacheDir?.path
+				result.success(path)
+			}
 //			apk
 			"getInstalledApps" ->{
 				ApkUtil.getInstalledApps(context = context, onLoaded = {list ->
@@ -175,9 +180,8 @@ object AppUtil {
 			"requestOrientation" -> {
 				try {
 					val type = call.argument<String>("type") ?: "portrait"
-					val isReverse = call.argument<Boolean>("reverse") ?: false
 					activity?.let {
-						requestOrientation(it, isReverse = isReverse, type = type)
+						requestOrientation(it, type = type)
 					}
 					result.success("")
 				} catch (err: Exception) {
@@ -341,7 +345,7 @@ object AppUtil {
 	}
 
 	private fun openUrl(context: Context, url: String) {
-		val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+		val i = Intent(Intent.ACTION_VIEW, url.toUri())
 		i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
 		context.startActivity(i)
@@ -365,21 +369,28 @@ object AppUtil {
 		}
 	}
 
-	private fun requestOrientation(ctx: Activity, type: String, isReverse: Boolean = false) {
-		if (type == "portrait") {
-			if (isReverse) {
-				ctx.requestedOrientation = SCREEN_ORIENTATION_UNSPECIFIED
-			} else {
-				ctx.requestedOrientation = SCREEN_ORIENTATION_UNSPECIFIED
-			}
-		} else if (type == "landscape") {
-			if (isReverse) {
-				ctx.requestedOrientation = SCREEN_ORIENTATION_REVERSE_LANDSCAPE
-			} else {
-				ctx.requestedOrientation = SCREEN_ORIENTATION_LANDSCAPE
-			}
+	@SuppressLint("SourceLockedOrientationActivity")
+    private fun requestOrientation(ctx: Activity, type: String) {
+        when (type) {
+            "portrait" -> {
+				ctx.requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+            }
+            "landscape" -> {
+                ctx.requestedOrientation = SCREEN_ORIENTATION_LANDSCAPE
 
-		}
+            }
+            "portraitReverse" -> {
+                ctx.requestedOrientation = SCREEN_ORIENTATION_REVERSE_PORTRAIT
+            }
+            "landscapeReverse" -> {
+                ctx.requestedOrientation = SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+            }
+            "autoRotate" -> {
+                ctx.requestedOrientation = SCREEN_ORIENTATION_SENSOR
+            }"fourWaySensor"->{
+			ctx.requestedOrientation = SCREEN_ORIENTATION_FULL_SENSOR
+			}
+        }
 	}
 
 	private fun toggleKeepScreenOn(window: Window, enable: Boolean) {
@@ -418,6 +429,7 @@ object AppUtil {
 
 	}
 
+	@Suppress("DEPRECATION")
 	private fun hideFullScreen(window: Window, ctx: Context) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			// ✅ Android 11+ (API 30+)

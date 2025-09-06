@@ -158,9 +158,10 @@ class AndroidAppUtil {
     return await _channel.invokeMethod<String>('$_name/getFilesDir') ?? '';
   }
 
-  ///`context.getExternalFilesDir(null)`
   ///
-  ///`storage/emulated/0/Android/data/com.example.myapp/files`
+  ///`storage/emulated/0/Android/data/[com.example.myapp]/files`
+  ///
+  ///context.getExternalFilesDir
   ///
   ///External storage, app-only	No (Android 4.4+ onwards)
   ///
@@ -170,7 +171,17 @@ class AndroidAppUtil {
   }
 
   ///
-  ////storage/emulated/0
+  ///`storage/emulated/0/Android/data/[your.package.name]/cache`
+  ///
+  ///context.externalCacheDir
+  ///
+  Future<String> getExternalCachePath() async {
+    return await _channel.invokeMethod<String>('$_name/getExternalCachePath') ??
+        '';
+  }
+
+  ///
+  ////`storage/emulated/0`
   ///
   Future<String> getAppExternalPath() async {
     // return await _channel.invokeMethod<String>('$_name/getAppExternalPath') ??

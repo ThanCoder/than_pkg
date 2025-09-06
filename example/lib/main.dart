@@ -75,9 +75,9 @@ class _MyAppState extends State<MyApp> {
               if (!await ThanPkg.platform.isStoragePermissionGranted()) {
                 await ThanPkg.platform.requestStoragePermission();
               }
-              appList = await ThanPkg.android.app.getInstalledAppsList();
-              if (!mounted) return;
-              setState(() {});
+              // appList = await ThanPkg.android.app.getInstalledAppsList();
+              final res = await ThanPkg.android.app.getExternalFilesDir();
+              print(res);
               // final outfile = await ThanPkg.platform.getAppExternalPath();
               // final stringBuff = StringBuffer('---app list---\n');
               // for (var app in list) {

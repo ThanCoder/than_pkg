@@ -10,7 +10,26 @@ class AndroidThumbnail {
   final _namePdf = 'pdfUtil';
   final _nameVideo = 'videoUtil';
 
-  // new methods
+  ///
+  /// 
+  ///
+  Future<Uint8List?> getPdfPageData({
+    required String path,
+    required int page,
+    int width = 0,
+    int height = 0,
+  }) async {
+    final res = await _channel.invokeMethod<Uint8List>(
+      '$_namePdf/getPdfPageData',
+      {
+        'path':path,
+        'page':page,
+        'width':width,
+        'height':height,
+      },
+    );
+    return res;
+  }
 
   Future<void> genVideoThumbnail2({
     required List<SrcDestType> pathList,
@@ -54,11 +73,10 @@ class AndroidThumbnail {
     required String outPath,
     required String videoPath,
   }) async {
-    return await _channel
-        .invokeMethod<String>('$_nameVideo/genVideoThumbnail', {
-      'video_path': videoPath,
-      'out_path': outPath,
-    });
+    return await _channel.invokeMethod<String>(
+      '$_nameVideo/genVideoThumbnail',
+      {'video_path': videoPath, 'out_path': outPath},
+    );
   }
 
   //pdf
