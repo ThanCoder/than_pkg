@@ -1,3 +1,9 @@
+## 3.8.0
+
+- Added `ThanPkg.android.thumbnail.getPdfPageData`
+- Added `ThanPkg.android.app.getExternalFilesDir`
+- Added Params`ThanPkg.android.app.requestOrientation`
+
 ## 3.7.0
 
 ## Added

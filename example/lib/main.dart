@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:than_pkg/enums/screen_orientation_types.dart';
 import 'package:than_pkg/than_pkg.dart';
 import 'package:than_pkg/types/installed_app.dart';
 
@@ -76,8 +77,7 @@ class _MyAppState extends State<MyApp> {
                 await ThanPkg.platform.requestStoragePermission();
               }
               // appList = await ThanPkg.android.app.getInstalledAppsList();
-              final res = await ThanPkg.android.app.getExternalFilesDir();
-              print(res);
+              // await ThanPkg.android.thumbnail.getPdfPageData(path: path, page: page);
               // final outfile = await ThanPkg.platform.getAppExternalPath();
               // final stringBuff = StringBuffer('---app list---\n');
               // for (var app in list) {

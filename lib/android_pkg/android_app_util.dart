@@ -191,11 +191,9 @@ class AndroidAppUtil {
 
   Future<void> requestOrientation({
     required ScreenOrientationTypes type,
-    bool isReverse = false,
   }) async {
     await _channel.invokeMethod('$_name/requestOrientation', {
       'type': type.name,
-      'reverse': isReverse,
     });
   }
 
