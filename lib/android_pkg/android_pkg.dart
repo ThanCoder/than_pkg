@@ -1,5 +1,7 @@
 import 'package:than_pkg/android_pkg/index.dart';
 
+import 'android_noti_util.dart';
+
 class AndroidPkg {
   static final AndroidPkg android = AndroidPkg._();
   AndroidPkg._();
@@ -10,4 +12,5 @@ class AndroidPkg {
   AndroidPermission get permission => AndroidPermission.permission;
   AndroidThumbnail get thumbnail => AndroidThumbnail.thumbnail;
   AndroidWifiUtil get wifi => AndroidWifiUtil.wifi;
+  AndroidNotiUtil get notiUtil => AndroidNotiUtil.instance;
 }

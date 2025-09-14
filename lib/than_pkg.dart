@@ -41,6 +41,7 @@ class ThanPkg implements ThanPkgInterface {
   static AndroidPkg get android => AndroidPkg.android;
   static LinuxPkg get linux => LinuxPkg.linux;
   static AppUtil get appUtil => AppUtil.instance;
+  
 
   Future<void> init({bool isShowDebugLog = false}) async {
     ThanPkg.isShowDebugLog = isShowDebugLog;
@@ -250,7 +251,12 @@ class ThanPkg implements ThanPkgInterface {
   ///   // Permission denied, show an error or request again
   /// }
   /// ```
-  ///
+  ///### Android Manifest
+  ///```xml
+  ///<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"tools:ignore="ScopedStorage" />
+  ///<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  ///<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  ///```
   /// This method should be implemented to check and request storage permissions.
   @override
   Future<bool> isStoragePermissionGranted() async {
@@ -273,8 +279,14 @@ class ThanPkg implements ThanPkgInterface {
   /// ```dart
   /// await requestStoragePermission(); // Request storage permission
   /// ```
-  ///
+  ///### Android Manifest
+  ///```xml
+  ///<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"tools:ignore="ScopedStorage" />
+  ///<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  ///<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  ///```
   /// This method should be implemented to handle the permission request logic.
+  ///
   @override
   Future<void> requestStoragePermission() async {
     // TODO: Implement requestStoragePermission method.
@@ -299,7 +311,11 @@ class ThanPkg implements ThanPkgInterface {
   /// List<String> wifiIPs = await getWifiAddressList();
   /// print("Available Wi-Fi IPs: $wifiIPs");
   /// ```
-  ///
+  ///### Android Manifest
+  ///```xml
+  ///<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  ///<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  ///```
   /// This method should be implemented to provide actual functionality.
   @override
   Future<List<String>> getWifiAddressList() {

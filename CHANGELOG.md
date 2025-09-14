@@ -1,3 +1,12 @@
+## 4.0.0
+
+### For Android
+- Added `ThanPkg.android.permission.requestBatteryOptimizationPermission`
+- Added `ThanPkg.android.notiUtil.checkAndRequestNotificationPermission`
+- Added `ThanPkg.android.notiUtil.showNotification`
+- Added `ThanPkg.android.notiUtil.showProgressNotification`
+- Added `ThanPkg.android.notiUtil.showCompleteNotification`
+
 ## 3.8.0
 
 - Added `ThanPkg.android.thumbnail.getPdfPageData`

@@ -13,6 +13,12 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Android 10+ background location access (optional) -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
     <application
         android:label="than_pkg_example"
         android:name="${applicationName}"
@@ -57,12 +63,12 @@
         </intent>
     </queries>
 
-<!--    <queries>-->
-<!--        &lt;!&ndash; Launchable apps အကုန် မြင်ချင်ရင် &ndash;&gt;-->
-<!--        <intent>-->
-<!--            <action android:name="android.intent.action.MAIN" />-->
-<!--            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--        </intent>-->
-<!--    </queries>-->
+    <!--    <queries>-->
+    <!--        &lt;!&ndash; Launchable apps အကုန် မြင်ချင်ရင် &ndash;&gt;-->
+    <!--        <intent>-->
+    <!--            <action android:name="android.intent.action.MAIN" />-->
+    <!--            <category android:name="android.intent.category.LAUNCHER" />-->
+    <!--        </intent>-->
+    <!--    </queries>-->
 
 </manifest>

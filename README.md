@@ -1,6 +1,56 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V3.7.0
+## ThanPkg V4.0.0
+
+## Android Notification
+
+```Dart
+final isPermissionGranted = await ThanPkg.android.notiUtil.checkAndRequestNotificationPermission();
+
+await ThanPkg.android.notiUtil.showNotification(
+  notificationId: 2,
+  channelId: 'message',
+  title: 'ငါက noti',
+  content: 'နေကောင်းလားဟေ့');
+
+for (int i = 1; i <= 100; i++) {
+  await ThanPkg.android.notiUtil.showProgressNotification(
+  progress: i,
+  title: 'Progress',
+  content: 'Progress $i%',
+  );
+  await Future.delayed(Duration(milliseconds: 100));
+}
+await Future.delayed(Duration(milliseconds: 500));
+await ThanPkg.android.notiUtil.showCompleteNotification(
+  title: 'Progress',
+  content: 'Progress Done');
+
+```
+
+## Android Permission
+
+```dart
+await ThanPkg.android.permission.*
+
+//<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+checkAndRequestNotificationPermission()
+//<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+requestBatteryOptimizationPermission()
+//<uses-permission android:name="android.permission.CAMERA" />
+requestCameraPermission()
+//<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+checkCanRequestPackageInstallsPermission()
+//<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
+requestPackageInstallPermission()
+//<!-- Location permissions -->
+//<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+//<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+//<!-- Android 10+ background location access (optional) -->
+//<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+requestLocationPermission()
+
+```
 
 ## Android App List
 
@@ -372,15 +422,6 @@ await ThanPkg.platform.genPdfCover(outDirPath: '', pdfPathList: []);
 await ThanPkg.platform.genVideoCover(outDirPath: '', videoPathList: []);
 ```
 
-# Android Permission
-
-```Dart
-//android any version can handle
-await ThanPkg.platform.isStoragePermissionGranted();
-await ThanPkg.platform.requestStoragePermission();
-await ThanPkg.platform.checkAndRequestPackageInstallPermission();
-```
-
 # Android only
 
 ```Dart
@@ -404,7 +445,7 @@ await ThanPkg.platform.getLocalIpAddress();
 await ThanPkg.platform.getWifiAddress();
 ```
 
-# android AndroidManifest
+# Android AndroidManifest Permission
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
@@ -412,12 +453,23 @@ await ThanPkg.platform.getWifiAddress();
     tools:ignore="ScopedStorage" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
     tools:ignore="QueryAllPackagesPermission" />
 
+<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+<uses-permission android:name="android.permission.CAMERA" />
+<!-- Location permissions -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+<!-- Android 10+ background location access (optional) -->
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 ```

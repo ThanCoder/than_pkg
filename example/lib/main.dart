@@ -73,9 +73,12 @@ class _MyAppState extends State<MyApp> {
           // onPressed: _test,
           onPressed: () async {
             try {
-              if (!await ThanPkg.platform.isStoragePermissionGranted()) {
-                await ThanPkg.platform.requestStoragePermission();
-              }
+              // if (!await ThanPkg.platform.isStoragePermissionGranted()) {
+              //   await ThanPkg.platform.requestStoragePermission();
+              // }
+              // ThanPkg.android.permission.requestBatteryOptimizationPermission();
+              // await ThanPkg.android.permission.requestLocationPermission();
+
               // appList = await ThanPkg.android.app.getInstalledAppsList();
               // await ThanPkg.android.thumbnail.getPdfPageData(path: path, page: page);
               // final outfile = await ThanPkg.platform.getAppExternalPath();
