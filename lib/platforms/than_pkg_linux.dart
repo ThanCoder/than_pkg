@@ -4,6 +4,19 @@ import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgLinux extends ThanPkg {
   @override
+  Future<void> showNotification({
+    required String title,
+    int? notificationId,
+    String content = 'content',
+  }) async {
+    ThanPkg.linux.notiUtil.showNotification(
+      title: title,
+      content: content,
+      notificationId: notificationId,
+    );
+  }
+
+  @override
   Future<bool> isStoragePermissionGranted() async {
     return true;
   }

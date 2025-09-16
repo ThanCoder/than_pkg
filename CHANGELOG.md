@@ -1,6 +1,16 @@
+## 4.1.0
+
+- Added `TWebview` -> only android.
+- Added `ThanPkg.android.webview.*` -> only android.
+- Added `ThanPkg.android.media.*` -> just testing!.
+- Added `ThanPkg.platform.showNotification`
+- Added `ThanPkg.android.notiUtil.showNotification`
+- Added `ThanPkg.linux.notiUtil.showNotification`
+
 ## 4.0.0
 
 ### For Android
+
 - Added `ThanPkg.android.permission.requestBatteryOptimizationPermission`
 - Added `ThanPkg.android.notiUtil.checkAndRequestNotificationPermission`
 - Added `ThanPkg.android.notiUtil.showNotification`

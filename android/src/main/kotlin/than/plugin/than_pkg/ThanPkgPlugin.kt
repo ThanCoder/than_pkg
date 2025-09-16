@@ -5,15 +5,18 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.webkit.WebView
 import com.example.myapplication.NotiUtil
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import io.flutter.view.TextureRegistry
 
 /** ThanPkgPlugin */
 class ThanPkgPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
@@ -25,11 +28,33 @@ class ThanPkgPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     private lateinit var channel: MethodChannel
     private lateinit var context: Context
     private var activity: Activity? = null
+    private var webView: WebView? = null
+
+    private lateinit var textureRegistry: TextureRegistry;
+
+    companion object {
+        var methodChannel: MethodChannel? = null
+
+    }
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "than_pkg")
         channel.setMethodCallHandler(this)
         context = flutterPluginBinding.applicationContext
+        textureRegistry = flutterPluginBinding.textureRegistry
+        methodChannel = channel
+
+        //web view
+        flutterPluginBinding.platformViewRegistry.registerViewFactory(
+            "t-webview",
+            WebviewFactory(context, channel, webViewCallback = { view ->
+                webView = view
+            })
+        )
+
+        // EventChannel set
+        val eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "mediaUtil/progress")
+        MediaUtil.setEventChannel(eventChannel)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -114,6 +139,18 @@ class ThanPkgPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
             call.method.startsWith("notiUtil/") -> {
                 NotiUtil.callCheck(call, result, context, activity)
             }
+
+            call.method.startsWith("webviewUtil/") -> {
+                webView?.let {
+                    it
+                    WebviewUtil.callCheck(call, result, it)
+                }
+            }
+
+            call.method.startsWith("mediaUtil/") -> {
+                MediaUtil.callCheck(call, result, textureRegistry)
+            }
+
 
             else -> {
                 result.notImplemented()

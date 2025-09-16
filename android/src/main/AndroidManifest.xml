@@ -25,4 +25,9 @@
 
     <!-- Android 10+ background location access (optional) -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <application>
+        <!-- 👇 Receiver သတ်မှတ် -->
+        <receiver android:name="than.plugin.than_pkg.NotificationClickReceiver" />
+    </application>
 </manifest>

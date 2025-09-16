@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,9 +22,11 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import than.plugin.than_pkg.NotificationClickReceiver
 
 //<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 object NotiUtil {
+
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun callCheck(
@@ -81,6 +84,20 @@ object NotiUtil {
 
             }
         }
+    }
+
+    private fun getPendingIntent(context: Context, notificationId: Int): PendingIntent {
+        val intent = Intent(context, NotificationClickReceiver::class.java).apply {
+            action = "MEDIA_NOTIFICATION_CLICK"
+            putExtra("notification_id", notificationId) // id ပေး
+        }
+
+        return PendingIntent.getBroadcast(
+            context,
+            notificationId, // requestCode, unique ဖြစ်အောင်
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
     }
 
     private var REQUEST_CODE = 1001
@@ -159,7 +176,7 @@ object NotiUtil {
     }
 
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "LaunchActivityFromNotification")
     fun showNotification(
         context: Context,
         call: MethodCall
@@ -184,11 +201,25 @@ object NotiUtil {
             notificationManager.createNotificationChannel(channel)
         }
 
+        val intent = Intent(context, NotificationClickReceiver::class.java).apply {
+            putExtra("notification_id", notificationId)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            notificationId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+
         // ✅ Notification Builder
         val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(android.R.drawable.ic_dialog_info) // icon တစ်ခုလိုအပ်တယ်
             .setContentTitle(title)
             .setContentText(content)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         // ✅ Notification Manager ကနေ show
@@ -248,6 +279,8 @@ object NotiUtil {
             .setSmallIcon(R.drawable.stat_sys_download_done)
             .setContentTitle(title)
             .setContentText(content)
+            .setContentIntent(getPendingIntent(context, notificationId))
+            .setAutoCancel(true)
             .setProgress(0, 0, false)
 
         manager.notify(notificationId, builder.build())

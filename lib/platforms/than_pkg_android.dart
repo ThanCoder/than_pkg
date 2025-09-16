@@ -3,10 +3,22 @@ import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgAndroid extends ThanPkg {
   @override
+  Future<void> showNotification({
+    required String title,
+    int? notificationId,
+    String content = 'content',
+  }) async {
+    await ThanPkg.android.notiUtil.showNotification(
+      notificationId: notificationId ?? 0,
+      title: title,
+      content: content,
+    );
+  }
+
+  @override
   Future<String> getWifiSSID() async {
     return await ThanPkg.android.wifi.getWifiSSID();
   }
-
 
   @override
   Future<int> getAppBatteryLevel() async {

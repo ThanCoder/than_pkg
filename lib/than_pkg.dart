@@ -16,6 +16,7 @@ export 'than_pkg_lib.dart';
 export 'utils/index.dart';
 export 'services/index.dart';
 export 't_database/index.dart';
+export 'view/index.dart';
 
 class ThanPkg implements ThanPkgInterface {
   //singleton
@@ -456,6 +457,12 @@ class ThanPkg implements ThanPkgInterface {
   @override
   Future<bool> isInternetConnected() {
     // TODO: implement isInternetConnected
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<void> showNotification({required String title, int? notificationId, String content = 'content'}) {
+    // TODO: implement showNotification
     throw UnimplementedError();
   }
 }

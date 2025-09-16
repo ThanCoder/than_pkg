@@ -2,7 +2,43 @@
 
 ## ThanPkg V4.0.0
 
+## Android Webview
+
+```Dart
+TWebview(url: 'http//'),
+//fetch html
+final html = ThanPkg.android.webview.onPageFinished();
+ThanPkg.android.webview.evaluateJavascript(script: 'js', isEscapeForJsonJs: true)
+ThanPkg.android.webview.goBack()
+ThanPkg.android.webview.goForward()
+ThanPkg.android.webview.clearCache(includeDiskFiles: false)
+ThanPkg.android.webview.clearHistory()
+ThanPkg.android.webview.getHtml()
+ThanPkg.android.webview.zoomIn()
+ThanPkg.android.webview.zoomOut()
+ThanPkg.android.webview.reload()
+```
+
+## Android Media
+
+```Dart
+ThanPkg.android.media.createTexture()
+ThanPkg.android.media.play(path: 'path', isVideo: bool)
+ThanPkg.android.media.currentPosition()
+ThanPkg.android.media.duration()
+ThanPkg.android.media.trackInfo()
+//just working!...Don't use;
+TVideoView(path: path, controller: controller)
+
+```
+
 ## Android Notification
+
+```Dart
+ThanPkg.platform.showNotification(title: 'i am title');
+ThanPkg.android.notiUtil.showNotification(title: 'i am title');
+ThanPkg.linux.notiUtil.showNotification(title: 'i am title');
+```
 
 ```Dart
 final isPermissionGranted = await ThanPkg.android.notiUtil.checkAndRequestNotificationPermission();
@@ -83,6 +119,11 @@ child: Image.memory(app.coverData!)),
 sudo apt install net-tools  // wifi
 sudo apt install poppler-utils //pdf thumbnail
 sudo apt install ffmpeg //video thumbnail
+
+//screenshoot
+sudo apt install scrot   # Ubuntu/Debian
+sudo dnf install scrot   # Fedora
+sudo pacman -S scrot     # Arch
 ```
 
 # Platforms Methods

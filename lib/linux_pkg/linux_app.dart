@@ -1,11 +1,66 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:than_pkg/than_pkg.dart';
 
 class LinuxApp {
   static final LinuxApp app = LinuxApp._();
   LinuxApp._();
   factory LinuxApp() => app;
+  ///```bash
+  ///
+  ///sudo apt install cheese
+  ///
+  ///```
+  Future<void> openWebCam() async {
+    Process.run("cheese", []);
+  }
+
+  ///
+  ///```bash
+  ///
+  ///sudo apt install scrot   # Ubuntu/Debian
+  ///
+  ///sudo dnf install scrot   # Fedora
+  ///
+  ///sudo pacman -S scrot     # Arch
+  ///```
+  ///
+  Future<void> screenShoot({
+    bool isOverride = true,
+    String? savedPath,
+    int? delaySec,
+    bool selectWindow = true,
+    bool includeWindowBorder = false,
+    bool includeMousePointer = false,
+  }) async {
+    try {
+      List<String> list = [];
+      if (isOverride) {
+        list.add('-o');
+      }
+      if (delaySec != null) {
+        list.add('-d');
+        list.add(delaySec.toString());
+      }
+      if (selectWindow) {
+        list.add('-s');
+      }
+      if (includeWindowBorder) {
+        list.add('-b');
+      }
+      if (includeMousePointer) {
+        list.add('-m');
+      }
+
+      if (savedPath != null && savedPath.isNotEmpty) {
+        list.add(savedPath);
+      }
+      await Process.run('scrot', list);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   Future<void> launch(String source) async {
     await Process.run('xdg-open', [source]);

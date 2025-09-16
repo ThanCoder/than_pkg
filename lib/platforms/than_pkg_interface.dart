@@ -48,4 +48,10 @@ abstract class ThanPkgInterface {
   });
 
   Future<bool> isInternetConnected();
+  // notification
+  Future<void> showNotification({
+    required String title,
+    int? notificationId,
+    String content = 'content',
+  });
 }

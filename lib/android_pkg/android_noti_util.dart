@@ -13,6 +13,21 @@ class AndroidNotiUtil {
   ///```xml
   ///<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
   ///```
+  ///Notification Click Listener
+  // Stream<int> notificationClickedListener() {
+  //   final controller = StreamController<int>();
+  //   _channel.setMethodCallHandler((call) async {
+  //     if (call.method == 'notificationClick') {
+  //       final id = call.arguments ?? -1;
+  //       controller.add(id);
+  //     }
+  //   });
+  //   return controller.stream;
+  // }
+
+  ///```xml
+  ///<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  ///```
   Future<bool> checkAndRequestNotificationPermission() async {
     final completer = Completer<bool>();
     _channel.setMethodCallHandler((call) async {
@@ -41,7 +56,12 @@ class AndroidNotiUtil {
     String channelDesc = '',
     String title = 'Noti Content Title',
     String content = 'Noti Content Text',
+    bool isAutoReqPermission = true,
   }) async {
+    if (isAutoReqPermission) {
+      await checkAndRequestNotificationPermission();
+    }
+
     await _channel.invokeMethod('$_name/showNotification', {
       'notificationId': notificationId,
       'channelId': channelId,
