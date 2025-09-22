@@ -38,4 +38,7 @@ extension FileSystemEntityExtension on FileSystemEntity {
   String getSizeLabel({int asFixed = 2}) {
     return statSync().size.toDouble().toFileSizeLabel(asFixed: asFixed);
   }
+   String toFileSizeLabel({int asFixed = 2}) {
+    return statSync().size.toDouble().toFileSizeLabel(asFixed: asFixed);
+  }
 }

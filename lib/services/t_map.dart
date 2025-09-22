@@ -83,4 +83,8 @@ extension TMapExtension on Map<String, dynamic> {
   bool getBool(List<String> keys, {bool def = false}) {
     return TMap.getBool(this, keys, defaultValue: def);
   }
+
+  T get<T>(List<String> keys, {required T def}) {
+    return TMap.get<T>(this, keys, defaultValue: def);
+  }
 }

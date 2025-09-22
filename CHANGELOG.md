@@ -1,3 +1,9 @@
+## 4.2.1
+
+- Added `TRecentDB`
+- Break Changed `TJsonDatabase<T>`
+- Break Changed `TDatabase<T>`
+
 ## 4.1.0
 
 - Added `TWebview` -> only android.

@@ -1,23 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:than_pkg/t_database/data_io.dart';
-import 'package:than_pkg/t_database/t_converter.dart';
+mixin TDatabaseListener {
+  void onDatabaseChanged(TDatabaseListenerTypes type, String? id);
+}
 
-import 't_database_listener.dart';
+enum TDatabaseListenerTypes { add, update, delete, saved }
 
 abstract class TDatabase<T> {
-  final DataIO io;
-  final TConverter converter;
-  final String databasePath;
-  TDatabase({
-    required this.io,
-    required this.converter,
-    required this.databasePath,
-  });
+  final String root;
+  TDatabase({required this.root});
 
   Future<void> add(T value);
-  Future<List<T>> getAll();
-  Future<void> update(T value);
-  Future<void> delete(T value);
+  Future<List<T>> getAll({Map<String, dynamic>? query = const {}});
+  Future<void> update(String id, T value);
+  Future<void> delete(String id);
 
   // listener
   final List<TDatabaseListener> _listeners = [];
@@ -31,9 +26,9 @@ abstract class TDatabase<T> {
     _listeners.remove(listener);
   }
 
-  void notify() {
+  void notify(TDatabaseListenerTypes type, String? id) {
     for (final listener in _listeners) {
-      listener.onDatabaseChanged();
+      listener.onDatabaseChanged(type, id);
     }
   }
 }

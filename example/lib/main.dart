@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:than_pkg/linux_pkg/linux_noti_util.dart';
 import 'package:than_pkg/than_pkg.dart';
 import 'package:than_pkg/types/installed_app.dart';
 
@@ -11,6 +10,8 @@ void main() async {
   await ThanPkg.instance.init(
     isShowDebugLog: true,
   );
+
+  TRecentDB.init(rootPath: 'test.json');
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -57,8 +58,12 @@ class _MyAppState extends State<MyApp> {
             if (!await ThanPkg.platform.isStoragePermissionGranted()) {
               await ThanPkg.platform.requestStoragePermission();
             }
+            // await TRecentDB.getInstance.putString('name', 'i am db name');
+            // await TRecentDB.getInstance.putBool('isDark', true);
+            // await TRecentDB.getInstance.putInt('age', 27);
+            // await TRecentDB.getInstance.putDouble('height', 2.5);
 
-            ThanPkg.linux.app.openWebCam();
+            print(TRecentDB.getInstance.getString('name', def: 'def'));
           } catch (e) {
             debugPrint(e.toString());
           }

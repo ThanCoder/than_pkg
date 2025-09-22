@@ -1,6 +1,22 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V4.0.0
+## ThanPkg V4.2.1
+
+## RecentDB
+
+```Dart
+//main
+TRecentDB.init(rootPath: 'test.json');
+
+//usage
+await TRecentDB.getInstance.putString('name', 'i am db name');
+await TRecentDB.getInstance.putBool('isDark', true);
+await TRecentDB.getInstance.putInt('age', 27);
+await TRecentDB.getInstance.putDouble('height', 2.5);V
+
+//get
+print(TRecentDB.getInstance.getString('name', def: 'def'));
+```
 
 ## Android Webview
 
