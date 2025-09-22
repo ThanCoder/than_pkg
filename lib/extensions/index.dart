@@ -6,3 +6,4 @@ export 'datetime_extension.dart';
 export 'double_extension.dart';
 export 't_platform.dart';
 export 'int_extension.dart';
+export 'duration_extension.dart';
