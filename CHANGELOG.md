@@ -1,3 +1,8 @@
+## 4.3.1
+
+- Added `DoubleExtension` -> `getAutoSpeedLabel`
+- Added `DurationExtension` -> `getAutoTimeLabel`
+
 ## 4.2.1
 
 - Added `TRecentDB`
