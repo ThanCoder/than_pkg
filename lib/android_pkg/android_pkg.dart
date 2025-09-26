@@ -17,4 +17,5 @@ class AndroidPkg {
   AndroidNotiUtil get notiUtil => AndroidNotiUtil.instance;
   AndroidWebviewUtil get webview => AndroidWebviewUtil.instance;
   AndroidMediaUtil get media => AndroidMediaUtil.instance;
+  AndroidIntentUtil get intent => AndroidIntentUtil.instance;
 }

@@ -1,3 +1,10 @@
+## 4.4.1
+
+- Added `AndroidIntentUtil`
+- Added `AndroidSettings`
+- Added `AndroidIntents`
+- Added `AndroidIntentData`
+
 ## 4.3.1
 
 - Added `DoubleExtension` -> `getAutoSpeedLabel`

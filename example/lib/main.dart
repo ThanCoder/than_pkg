@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:than_pkg/enums/android_intent_data.dart';
+import 'package:than_pkg/enums/android_intents.dart';
+import 'package:than_pkg/enums/android_settings.dart';
 import 'package:than_pkg/than_pkg.dart';
 import 'package:than_pkg/types/installed_app.dart';
 
@@ -52,24 +55,26 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Placeholder(),
       floatingActionButton: FloatingActionButton(
-        // onPressed: _test,
-        onPressed: () async {
-          try {
-            if (!await ThanPkg.platform.isStoragePermissionGranted()) {
-              await ThanPkg.platform.requestStoragePermission();
-            }
-            // await TRecentDB.getInstance.putString('name', 'i am db name');
-            // await TRecentDB.getInstance.putBool('isDark', true);
-            // await TRecentDB.getInstance.putInt('age', 27);
-            // await TRecentDB.getInstance.putDouble('height', 2.5);
+          // onPressed: _test,
+          onPressed: () async {
+            try {
+              // if (!await ThanPkg.platform.isStoragePermissionGranted()) {
+              //   await ThanPkg.platform.requestStoragePermission();
+              // }
+              // await TRecentDB.getInstance.putString('name', 'i am db name');
+              // await TRecentDB.getInstance.putBool('isDark', true);
+              // await TRecentDB.getInstance.putInt('age', 27);
+              // await TRecentDB.getInstance.putDouble('height', 2.5);
 
-            print(TRecentDB.getInstance.getString('name', def: 'def'));
-          } catch (e) {
-            debugPrint(e.toString());
-          }
-        },
-        child: Icon(Icons.get_app),
-      ),
+              // print(TRecentDB.getInstance.getString('name', def: 'def'));
+              // print(AndroidSettings.ACTION_SETTINGS);
+
+              await ThanPkg.android.intent.shareUrl(url: 'https://github.com/');
+            } catch (e) {
+              debugPrint(e.toString());
+            }
+          },
+          child: Icon(Icons.get_app)),
     );
   }
 }

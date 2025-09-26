@@ -151,6 +151,9 @@ class ThanPkgPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 MediaUtil.callCheck(call, result, textureRegistry)
             }
 
+            call.method.startsWith("intentUtil/") -> {
+                activity?.let { it -> IntentUtil.callCheck(call, result, context, it) }
+            }
 
             else -> {
                 result.notImplemented()

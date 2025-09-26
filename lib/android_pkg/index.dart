@@ -4,4 +4,4 @@ export 'android_permission.dart';
 export 'android_pkg.dart';
 export 'android_thumbnail.dart';
 export 'android_wifi_util.dart';
-
+export 'android_intent_util.dart';

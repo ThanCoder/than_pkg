@@ -1,6 +1,41 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V4.2.1
+## ThanPkg V4.4.1
+
+## AndroidSettings
+
+- `AndroidSettings.*`
+
+```Dart
+await ThanPkg.android.intent.callSettingIntent(
+  actionType: AndroidSettings.ACTION_VPN_SETTINGS);
+```
+
+## AndroidIntents
+
+- `AndroidIntents.*`
+
+```Dart
+await ThanPkg.android.intent.callIntent(
+  intentType: AndroidIntents.ACTION_DIAL,
+  uri: Uri.parse('tel:09788269103'),
+);
+
+await ThanPkg.android.intent.callIntent(
+  intentType: AndroidIntents.ACTION_VIEW,
+  uri: Uri.parse('https://github.com/'),
+);
+
+//call intent `open share dialog`
+await ThanPkg.android.intent.callIntent(
+  intentType: AndroidIntentData.ACTION_SEND,
+  extras: {
+    AndroidIntentData.EXTRA_TEXT: "Hello World",
+    AndroidIntentData.EXTRA_SUBJECT: "Subject Example",
+  },
+  mimeType: "text/plain", // important
+);
+```
 
 ## RecentDB
 
