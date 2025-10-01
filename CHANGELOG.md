@@ -1,3 +1,7 @@
+## 4.5.1
+
+- Added `ThanPkg.android.app.setWallpaper`
+
 ## 4.4.1
 
 - Added `AndroidIntentUtil`

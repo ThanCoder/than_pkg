@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
           // onPressed: _test,
           onPressed: () async {
             try {
+              // ThanPkg.android.app.setWallpaper(path: path)
               // if (!await ThanPkg.platform.isStoragePermissionGranted()) {
               //   await ThanPkg.platform.requestStoragePermission();
               // }

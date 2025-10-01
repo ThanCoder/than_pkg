@@ -1,6 +1,6 @@
 name: than_pkg
 description: My personal Flutter plugin with support for both Android and Linux platforms.
-version: 4.4.1
+version: 4.5.1
 homepage: https://github.com/ThanCoder/than_pkg_flutter_lib
 repository: https://github.com/ThanCoder/than_pkg_flutter_lib
 

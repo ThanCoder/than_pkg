@@ -15,6 +15,13 @@ class AndroidAppUtil {
   final _name = 'appUtil';
 
   ///
+  /// setWallpaper (with imagePath)
+  ///
+  Future<void> setWallpaper({required String path}) async {
+    await _channel.invokeMethod('$_name/setWallpaper', {'path': path});
+  }
+
+  ///
   /// Installed apps list (with apkPath)
   ///
   Future<List<InstalledApp>> getInstalledAppsList() async {

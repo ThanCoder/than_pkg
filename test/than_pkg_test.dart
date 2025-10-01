@@ -7,9 +7,8 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockThanPkgPlatform
     with MockPlatformInterfaceMixin
     implements ThanPkgPlatform {
-
-  @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  // @override
+  // Future<String?> getPlatformVersion() => Future.value('42');
 }
 
 void main() {

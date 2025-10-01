@@ -1,6 +1,12 @@
 ## My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V4.4.1
+## ThanPkg V4.5.1
+
+## Added
+
+```Dart
+ThanPkg.android.app.setWallpaper(path: [image fullpath])
+```
 
 ## AndroidSettings
 
