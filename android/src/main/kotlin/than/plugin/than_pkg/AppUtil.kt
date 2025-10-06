@@ -3,6 +3,7 @@ package than.plugin.than_pkg
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.UiModeManager
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
@@ -11,10 +12,9 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
-import android.net.Uri
 import android.os.BatteryManager
 import android.os.Build
 import android.provider.Settings
@@ -25,10 +25,9 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
-import java.util.concurrent.Executors
-import androidx.core.net.toUri
 
 
 object AppUtil {
@@ -40,7 +39,7 @@ object AppUtil {
             "setWallpaper" -> {
                 try {
                     val path = call.argument<String>("path")
-                    val wallpaperManager = WallpaperManager.getInstance(this)
+                    val wallpaperManager = WallpaperManager.getInstance(context)
                     val bitmap = BitmapFactory.decodeFile(path)
 
                     wallpaperManager.setBitmap(bitmap)

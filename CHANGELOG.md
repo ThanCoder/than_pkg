@@ -1,3 +1,8 @@
+## 4.5.2
+
+- Fixed `ThanPkg.android.app.setWallpaper`
+- Fixed `Building Android Apk Error`
+
 ## 4.5.1
 
 - Added `ThanPkg.android.app.setWallpaper`
