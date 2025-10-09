@@ -168,7 +168,7 @@ height: 50,
 child: Image.memory(app.coverData!)),
 ```
 
-# Needed lib for linux
+## Needed lib for linux
 
 ```bash
 sudo apt install net-tools  // wifi
@@ -181,7 +181,7 @@ sudo dnf install scrot   # Fedora
 sudo pacman -S scrot     # Arch
 ```
 
-# Platforms Methods
+## Platforms Methods
 
 - `ThanPkg.platform.*`
 - `ThanPkg.platform.checkScreenOrientation`
@@ -190,11 +190,11 @@ sudo pacman -S scrot     # Arch
 - `ThanPkg.platform.getAppBatteryLevel`
 - `ThanPkg.platform.getDeviceId`
 
-# Linux
+## Linux
 
 - `ThanPkg.linux.*`
 
-# Android
+## Android
 
 - `ThanPkg.android.*`
 
@@ -505,7 +505,7 @@ Future<void> requestCameraPermission()
 Future<void> requestLocationPermission()
 ```
 
-# Android && linux
+## Android && linux
 
 ```Dart
 //old method
@@ -518,7 +518,7 @@ await ThanPkg.platform.genPdfCover(outDirPath: '', pdfPathList: []);
 await ThanPkg.platform.genVideoCover(outDirPath: '', videoPathList: []);
 ```
 
-# Android only
+## Android only
 
 ```Dart
 //old method
@@ -541,7 +541,7 @@ await ThanPkg.platform.getLocalIpAddress();
 await ThanPkg.platform.getWifiAddress();
 ```
 
-# Android AndroidManifest Permission
+## Android AndroidManifest Permission
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
