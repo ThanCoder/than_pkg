@@ -13,8 +13,14 @@ void main() async {
   await ThanPkg.instance.init(
     isShowDebugLog: true,
   );
-
-  TRecentDB.init(rootPath: 'test.json');
+  // class instance
+  final recent = TRecentDB()..setRootPath('test2.json');
+  // singleton
+  await TRecentDB.getInstance.init(rootPath: 'test.json');
+  // put && delete
+  await TRecentDB.getInstance.putString('name', 'thancoder');
+  await recent.putString('name', 'thancoder');
+  await recent.delete('name');
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -70,7 +76,7 @@ class _MyAppState extends State<MyApp> {
               // print(TRecentDB.getInstance.getString('name', def: 'def'));
               // print(AndroidSettings.ACTION_SETTINGS);
 
-              await ThanPkg.android.intent.shareUrl(url: 'https://github.com/');
+              // await ThanPkg.android.intent.shareUrl(url: 'https://github.com/');
             } catch (e) {
               debugPrint(e.toString());
             }

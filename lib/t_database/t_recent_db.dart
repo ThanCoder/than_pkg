@@ -7,38 +7,38 @@ import 'package:than_pkg/than_pkg.dart';
 
 class TRecentDB {
   final DataIO io;
-  final String root;
-  TRecentDB({required this.root}) : io = JsonIO.instance {
-    _init();
-  }
+  String _root = '';
+  TRecentDB() : io = JsonIO.instance;
 
   static TRecentDB? _instance;
-  static String _root = '';
-  static void init({required String rootPath}) {
-    _root = rootPath;
-  }
 
   static TRecentDB get getInstance {
-    if (_root.isEmpty) {
-      throw PathNotFoundException(
-        _root,
-        OSError(
-          'TRecentDB: rootPath:`$_root` Not Found!.Usage: `TRecentDB.init()`',
-        ),
-      );
-    }
-    _instance ??= TRecentDB(root: _root);
+    _instance ??= TRecentDB();
     return _instance!;
   }
+
+  void setRootPath(String root) {
+    _root = root;
+  }
+
+  String get getRoot => _root;
 
   // class
   Map<String, dynamic> _map = {};
 
-  void _init() async {
+  Future<void> init({required String rootPath}) async {
     try {
-      if (root.isEmpty) return;
-      if (!File(root).existsSync()) return;
-      final source = await io.read(root);
+      _root = rootPath;
+      if (_root.isEmpty) {
+        throw PathNotFoundException(
+          _root,
+          OSError(
+            'TRecentDB: rootPath:`$_root` Not Found!.Usage: `await TRecentDB.getInstance.init(rootPath: \'test.json\')`',
+          ),
+        );
+      }
+      if (!File(_root).existsSync()) return;
+      final source = await io.read(_root);
       _map = jsonDecode(source);
     } catch (e) {
       debugPrint('[TRecentDB:init]: ${e.toString()}');
@@ -47,11 +47,17 @@ class TRecentDB {
 
   Future<void> save() async {
     try {
-      if (root.isEmpty) return;
-      await io.write(root, JsonEncoder.withIndent(' ').convert(_map));
+      if (_root.isEmpty) return;
+      await io.write(_root, JsonEncoder.withIndent(' ').convert(_map));
     } catch (e) {
       debugPrint('[TRecentDB:save]: ${e.toString()}');
     }
+  }
+
+  // delete
+  Future<void> delete(String key) async {
+    _map.remove(key);
+    await save();
   }
 
   // set

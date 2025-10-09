@@ -1,3 +1,7 @@
+## 4.5.3
+
+- Fixed `TRecentDB` Some Error.
+
 ## 4.5.2
 
 - Fixed `ThanPkg.android.app.setWallpaper`
