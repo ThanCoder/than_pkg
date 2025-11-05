@@ -4,6 +4,11 @@ import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgLinux extends ThanPkg {
   @override
+  Future<List<String>> getABI() async {
+    return await ThanPkg.linux.app.getABI();
+  }
+
+  @override
   Future<void> showNotification({
     required String title,
     int? notificationId,

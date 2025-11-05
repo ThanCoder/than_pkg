@@ -54,4 +54,6 @@ abstract class ThanPkgInterface {
     int? notificationId,
     String content = 'content',
   });
+
+  Future<List<String>> getABI();
 }

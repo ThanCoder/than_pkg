@@ -1,4 +1,16 @@
-# 4.5.3
+# 5.0.0
+
+- Changed `Future<Map<String, dynamic>> getDeviceInfo` to `Future<AndroidDeviceInfo> getDeviceInfo`
+- Added `ThanPkg.appUtil.getHostPath`
+- Added `ThanPkg.platform.getABI`
+- Added `ThanPkg.linux.app.getABI`
+- Added `ThanPkg.android.app.getABI`
+- Added `ThanPkg.android.app.getAppCachePath`
+- Added `ThanPkg.android.app.cleanAppCache`
+- Break Changed `TJsonDatabase<T>`
+- Break Changed `TDatabase<T>`
+
+## 4.5.3
 
 - Fixed `TRecentDB` Some Error.
 
@@ -62,9 +74,7 @@
 
 ## 3.6.0
 
-## Added
-
-- `FileExtension`
+-Added `FileExtension`
 
 ## 3.5.1
 
@@ -74,21 +84,17 @@
 
 ## 3.5.0
 
-## Added
-
-- `TJsonDatabase<T>`
-- `DataIO`
-- `JsonIO`
-- `TDatabase<T>`
-- `TConverter<T,V>`
-- `JsonConverter<T>`
+-Added `TJsonDatabase<T>`
+-Added `DataIO`
+-Added `JsonIO`
+-Added `TDatabase<T>`
+-Added `TConverter<T,V>`
+-Added `JsonConverter<T>`
 
 ## 3.1.4
 
-## Added
-
-- `TMap`
-- `TMapExtension`
+-Added `TMap`
+-Added `TMapExtension`
 
 ## 3.0.4
 

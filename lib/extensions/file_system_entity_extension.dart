@@ -4,7 +4,7 @@ import 'package:than_pkg/than_pkg.dart';
 
 extension FileSystemEntityExtension on FileSystemEntity {
   String getName({bool withExt = true}) {
-    final name = path.split('/').last;
+    final name = path.split(Platform.pathSeparator).last;
     if (!withExt) {
       return name.split('.').first;
     }
@@ -12,7 +12,7 @@ extension FileSystemEntityExtension on FileSystemEntity {
   }
 
   String get getExt {
-    return path.split('/').last;
+    return path.split(Platform.pathSeparator).last;
   }
 
   bool get isDirectory {
@@ -38,7 +38,8 @@ extension FileSystemEntityExtension on FileSystemEntity {
   String getSizeLabel({int asFixed = 2}) {
     return statSync().size.toDouble().toFileSizeLabel(asFixed: asFixed);
   }
-   String toFileSizeLabel({int asFixed = 2}) {
+
+  String toFileSizeLabel({int asFixed = 2}) {
     return statSync().size.toDouble().toFileSizeLabel(asFixed: asFixed);
   }
 }

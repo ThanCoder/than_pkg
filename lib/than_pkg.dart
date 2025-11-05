@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:than_pkg/android_pkg/android_pkg.dart';
 import 'package:than_pkg/linux_pkg/linux_pkg.dart';
@@ -42,10 +42,16 @@ class ThanPkg implements ThanPkgInterface {
   static AndroidPkg get android => AndroidPkg.android;
   static LinuxPkg get linux => LinuxPkg.linux;
   static AppUtil get appUtil => AppUtil.instance;
-  
+
+  ///Auto init
+  ///
+  /// `WidgetsFlutterBinding.ensureInitialized();`
+  ///
+  /// `await windowManager.ensureInitialized();`
 
   Future<void> init({bool isShowDebugLog = false}) async {
     ThanPkg.isShowDebugLog = isShowDebugLog;
+    WidgetsFlutterBinding.ensureInitialized();
     if (Platform.isLinux) {
       await windowManager.ensureInitialized();
     }
@@ -61,6 +67,21 @@ class ThanPkg implements ThanPkgInterface {
     } else {
       debugPrint(message);
     }
+  }
+
+  /// ## Supported ABIs
+  ///```
+  ///armeabi-v7a → 32-bit ARM
+  ///arm64-v8a → 64-bit ARM
+  ///x86 → Intel 32-bit
+  ///x86_64 → Intel 64-bit
+  ///```
+  /// Linux -> ` await Process.run('uname', ['-m']);`
+  ///
+  ///Android -> `Build.SUPPORTED_ABIS.toList()`
+  @override
+  Future<List<String>> getABI() {
+    throw UnimplementedError();
   }
 
   /// Generates cover images for a list of PDF files.
@@ -117,7 +138,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<String?> getLocalIpAddress() {
-    // TODO: implement getLocalIpAddress
     throw UnimplementedError();
   }
 
@@ -139,7 +159,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<String?> getPlatformVersion() {
-    // TODO: Implement getPlatformVersion method.
     throw UnimplementedError();
   }
 
@@ -164,7 +183,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<void> openUrl({required String url}) {
-    // TODO: Implement openUrl method.
     throw UnimplementedError();
   }
 
@@ -189,7 +207,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<void> toggleFullScreen({required bool isFullScreen}) {
-    // TODO: Implement toggleFullScreen method.
     throw UnimplementedError();
   }
 
@@ -201,7 +218,6 @@ class ThanPkg implements ThanPkgInterface {
   ///
   @override
   Future<String?> getDeviceId() {
-    // TODO: Implement getDeviceId method.
     throw UnimplementedError();
   }
 
@@ -226,7 +242,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<void> toggleKeepScreen({required bool isKeep}) {
-    // TODO: Implement toggleKeepScreen method.
     throw UnimplementedError();
   }
 
@@ -261,7 +276,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to check and request storage permissions.
   @override
   Future<bool> isStoragePermissionGranted() async {
-    // TODO: Implement isStoragePermissionGranted method.
     throw UnimplementedError();
   }
 
@@ -290,7 +304,6 @@ class ThanPkg implements ThanPkgInterface {
   ///
   @override
   Future<void> requestStoragePermission() async {
-    // TODO: Implement requestStoragePermission method.
     throw UnimplementedError();
   }
 
@@ -320,7 +333,6 @@ class ThanPkg implements ThanPkgInterface {
   /// This method should be implemented to provide actual functionality.
   @override
   Future<List<String>> getWifiAddressList() {
-    // TODO: implement getWifiAddressList
     throw UnimplementedError();
   }
 
@@ -357,7 +369,6 @@ class ThanPkg implements ThanPkgInterface {
     required List<String> videoPathList,
     int iconSize = 300,
   }) {
-    // TODO: implement getVideoCover
     throw UnimplementedError();
   }
 
@@ -383,7 +394,6 @@ class ThanPkg implements ThanPkgInterface {
   /// ```
   @override
   Future<String?> getAppRootPath() {
-    // TODO: implement getAppRootPath
     throw UnimplementedError();
   }
 
@@ -401,25 +411,21 @@ class ThanPkg implements ThanPkgInterface {
   /// ```
   @override
   Future<String?> getAppExternalPath() {
-    // TODO: implement getAppExternalPath
     throw UnimplementedError();
   }
 
   @override
   Future<bool> isAppSystemThemeDarkMode() {
-    // TODO: implement isAppSystemThemeDarkMode
     throw UnimplementedError();
   }
 
   @override
   Future<String?> getWifiSSID() {
-    // TODO: implement getWifiSSID
     throw UnimplementedError();
   }
 
   @override
   Future<int?> getAppBatteryLevel() {
-    // TODO: implement getAppBatteryLevel
     throw UnimplementedError();
   }
 
@@ -430,7 +436,6 @@ class ThanPkg implements ThanPkgInterface {
 
   @override
   Future<void> launch(String source) {
-    // TODO: implement launch
     throw UnimplementedError();
   }
 
@@ -440,7 +445,6 @@ class ThanPkg implements ThanPkgInterface {
     int iconSize = 300,
     bool isOverride = false,
   }) {
-    // TODO: implement genPdfCover2
     throw UnimplementedError();
   }
 
@@ -450,19 +454,20 @@ class ThanPkg implements ThanPkgInterface {
     int iconSize = 300,
     bool isOverride = false,
   }) {
-    // TODO: implement genVideoCover2
     throw UnimplementedError();
   }
 
   @override
   Future<bool> isInternetConnected() {
-    // TODO: implement isInternetConnected
     throw UnimplementedError();
   }
-  
+
   @override
-  Future<void> showNotification({required String title, int? notificationId, String content = 'content'}) {
-    // TODO: implement showNotification
+  Future<void> showNotification({
+    required String title,
+    int? notificationId,
+    String content = 'content',
+  }) {
     throw UnimplementedError();
   }
 }

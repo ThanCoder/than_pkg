@@ -4,7 +4,7 @@ import 'package:than_pkg/than_pkg.dart';
 
 extension FileExtension on File {
   String getName({bool withExt = true}) {
-    final name = path.split('/').last;
+    final name = path.split(Platform.pathSeparator).last;
     if (!withExt) {
       return name.split('.').first;
     }
@@ -12,7 +12,7 @@ extension FileExtension on File {
   }
 
   String get getExt {
-    return path.split('/').last;
+    return path.split(Platform.pathSeparator).last;
   }
 
   bool get isDirectory {

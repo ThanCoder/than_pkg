@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,27 +9,31 @@ class AppUtil {
   factory AppUtil() => instance;
 
   Future<void> clearImageCache() async {
-  PaintingBinding.instance.imageCache.clear();
-  PaintingBinding.instance.imageCache.clearLiveImages();
-  await Future.delayed(const Duration(milliseconds: 500));
-}
-
-void copyText(String text) {
-  try {
-    Clipboard.setData(ClipboardData(text: text));
-  } catch (e) {
-    debugPrint('copyText: ${e.toString()}');
+    PaintingBinding.instance.imageCache.clear();
+    PaintingBinding.instance.imageCache.clearLiveImages();
+    await Future.delayed(const Duration(milliseconds: 500));
   }
-}
 
-Future<String> pasteText() async {
-  String res = '';
-  ClipboardData? data = await Clipboard.getData('text/plain');
-  if (data != null) {
-    res = data.text ?? '';
+  void copyText(String text) {
+    try {
+      Clipboard.setData(ClipboardData(text: text));
+    } catch (e) {
+      debugPrint('copyText: ${e.toString()}');
+    }
   }
-  return res;
-}
+
+  Future<String> pasteText() async {
+    String res = '';
+    ClipboardData? data = await Clipboard.getData('text/plain');
+    if (data != null) {
+      res = data.text ?? '';
+    }
+    return res;
+  }
+
+  String? getHostPath() {
+    return Platform.environment['HOME'];
+  }
 
   String getParseMinutes(int minutes) {
     String res = '';

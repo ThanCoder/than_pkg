@@ -7,6 +7,25 @@ class LinuxApp {
   static final LinuxApp app = LinuxApp._();
   LinuxApp._();
   factory LinuxApp() => app;
+
+  /// ## Supported ABIs
+  ///```
+  ///armeabi-v7a → 32-bit ARM
+  ///arm64-v8a → 64-bit ARM
+  ///x86 → Intel 32-bit
+  ///x86_64 → Intel 64-bit
+  ///```
+  /// Bash -> ` await Process.run('uname', ['-m']);`
+  Future<List<String>> getABI() async {
+    try {
+      final result = await Process.run('uname', ['-m']);
+      final arch = result.stdout.toString().trim();
+      return [arch];
+    } catch (e) {
+      return [];
+    }
+  }
+
   ///```bash
   ///
   ///sudo apt install cheese

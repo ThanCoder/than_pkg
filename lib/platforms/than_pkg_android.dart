@@ -3,6 +3,11 @@ import 'package:than_pkg/types/src_dest_type.dart';
 
 class ThanPkgAndroid extends ThanPkg {
   @override
+  Future<List<String>> getABI() async {
+    return ThanPkg.android.app.getABI();
+  }
+
+  @override
   Future<void> showNotification({
     required String title,
     int? notificationId,
@@ -37,7 +42,7 @@ class ThanPkgAndroid extends ThanPkg {
 
   @override
   Future<String> getAppExternalPath() async {
-    return await ThanPkg.android.app.getAppExternalPath();
+    return ThanPkg.android.app.getAppExternalPath();
   }
 
   @override

@@ -14,7 +14,7 @@ void main() {
   });
 
   testWidgets('getAppExternalPath', (widgetTester) async {
-    final res = await ThanPkg.android.app.getAppExternalPath();
+    final res = ThanPkg.android.app.getAppExternalPath();
     expect(res, isA<String>());
     expect(res, isNotEmpty);
   });

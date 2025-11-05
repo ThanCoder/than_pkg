@@ -11,6 +11,27 @@ abstract class TJsonDatabase<T> extends TDatabase<T> {
 
   T fromMap(Map<String, dynamic> map);
   Map<String, dynamic> toMap(T value);
+  String getId(T value);
+
+  @override
+  Future<void> update(String id, T value) async {
+    final list = await getAll();
+    final index = list.indexWhere((e) => getId(e) == id);
+    if (index == -1) throw Exception('id: $id Not Found!');
+    list[index] = value;
+    notify(TDatabaseListenerTypes.update, id);
+    await save(list);
+  }
+
+  @override
+  Future<void> delete(String id) async {
+    final list = await getAll();
+    final index = list.indexWhere((e) => getId(e) == id);
+    if (index == -1) throw Exception('id: $id Not Found!');
+    list.removeAt(index);
+    notify(TDatabaseListenerTypes.delete, id);
+    await save(list);
+  }
 
   @override
   Future<List<T>> getAll({Map<String, dynamic>? query = const {}}) async {
@@ -24,7 +45,7 @@ abstract class TJsonDatabase<T> extends TDatabase<T> {
   Future<void> add(T value) async {
     final list = await getAll();
     list.add(value);
-    notify(TDatabaseListenerTypes.add, null);
+    notify(TDatabaseListenerTypes.add, getId(value));
     await save(list);
   }
 

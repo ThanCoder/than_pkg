@@ -128,7 +128,7 @@ class _TVideoViewState extends State<TVideoView> {
             max: duration.toDouble(),
             onChanged: (value) {},
             onChangeEnd: (double value) {
-              print('dur: $duration - v: ${value.round()}');
+              // print('dur: $duration - v: ${value.round()}');
               widget.controller.seekTo(msec: value.round());
             },
           );

@@ -26,6 +26,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
+import io.flutter.Log
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
 
@@ -35,6 +36,10 @@ object AppUtil {
     fun callCheck(call: MethodCall, result: Result, context: Context, activity: Activity?) {
         val method = call.method.replace("appUtil/", "")
         when (method) {
+            "getABI" -> {
+                val abiList = Build.SUPPORTED_ABIS.toList()
+                result.success(abiList)
+            }
 
             "setWallpaper" -> {
                 try {
@@ -49,7 +54,23 @@ object AppUtil {
                 }
 
             }
-//			cache
+
+            "getAppCachePath" -> {
+                val path = context.cacheDir.absolutePath
+                result.success(path)
+            }
+
+            "cleanAppCache" -> {
+                try {
+                    context.cacheDir.deleteRecursively()
+                    Log.d("CacheCleaner", "Internal cache cleared")
+                    result.success(true)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    result.success(false)
+                }
+            }
+
             "getExternalCachePath" -> {
                 val path = context.externalCacheDir?.path
                 result.success(path)
@@ -343,6 +364,7 @@ object AppUtil {
     @RequiresApi(Build.VERSION_CODES.S)
     fun getDeviceInfo(): Map<String, Any> {
         val obj = mapOf(
+            "abi" to Build.SUPPORTED_ABIS.toList(),
             "fingerprint" to Build.FINGERPRINT,
             "soc_model" to Build.SOC_MODEL,
             "model" to Build.MODEL,

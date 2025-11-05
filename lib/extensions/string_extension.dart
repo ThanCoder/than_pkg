@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:than_pkg/utils/f_path.dart';
+
 extension StringExtension on String {
   String toCaptalize() {
     if (isEmpty) return this;
@@ -5,7 +9,7 @@ extension StringExtension on String {
   }
 
   String getName({bool withExt = true}) {
-    final name = split('/').last;
+    final name = split(Platform.pathSeparator).last;
     if (!withExt) {
       return name.split('.').first;
     }
@@ -13,6 +17,10 @@ extension StringExtension on String {
   }
 
   String get getExt {
-    return split('/').last;
+    return split(Platform.pathSeparator).last;
+  }
+
+  String pathJoin(String path, String name) {
+    return FPath.join(path, name);
   }
 }

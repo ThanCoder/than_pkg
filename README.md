@@ -2,6 +2,18 @@
 
 ## ThanPkg V4.5.3
 
+## Android ABI
+
+```Dart
+armeabi-v7a → 32-bit ARM
+arm64-v8a → 64-bit ARM
+x86 → Intel 32-bit
+x86_64 → Intel 64-bit
+
+List<String> apis = await ThanPkg.platform.getABI();
+
+```
+
 ## RecentDB
 
 ```Dart

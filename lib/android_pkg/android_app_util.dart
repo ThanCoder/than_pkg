@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 import 'package:than_pkg/enums/screen_orientation_types.dart';
+import 'package:than_pkg/types/android_device_info.dart';
 import 'package:than_pkg/types/index.dart';
 
 class AndroidAppUtil {
@@ -13,6 +14,22 @@ class AndroidAppUtil {
 
   final _channel = const MethodChannel('than_pkg');
   final _name = 'appUtil';
+
+  /// ## Supported ABIs
+  ///```
+  ///armeabi-v7a → 32-bit ARM
+  ///arm64-v8a → 64-bit ARM
+  ///x86 → Intel 32-bit
+  ///x86_64 → Intel 64-bit
+  ///```
+  ///
+  ///Kotlin -> `Build.SUPPORTED_ABIS.toList()`
+  ///
+  Future<List<String>> getABI() async {
+    final res = await _channel.invokeMethod<List>('$_name/getABI');
+    if (res == null) return [];
+    return List<String>.from(res);
+  }
 
   ///
   /// setWallpaper (with imagePath)
@@ -107,9 +124,10 @@ class AndroidAppUtil {
     return await _channel.invokeMethod<int>('$_name/getSdkInt') ?? 0;
   }
 
-  Future<Map<String, dynamic>> getDeviceInfo() async {
+  Future<AndroidDeviceInfo> getDeviceInfo() async {
     final res = await _channel.invokeMethod<Map>('$_name/getDeviceInfo') ?? {};
-    return Map<String, dynamic>.from(res);
+    final map = Map<String, dynamic>.from(res);
+    return AndroidDeviceInfo.fromMap(map);
   }
 
   Future<void> openPdfWithIntent({required String path}) async {
@@ -168,7 +186,7 @@ class AndroidAppUtil {
   ///
   ///`storage/emulated/0/Android/data/[com.example.myapp]/files`
   ///
-  ///context.getExternalFilesDir
+  /// kotlin -> `context.getExternalFilesDir`
   ///
   ///External storage, app-only	No (Android 4.4+ onwards)
   ///
@@ -180,7 +198,7 @@ class AndroidAppUtil {
   ///
   ///`storage/emulated/0/Android/data/[your.package.name]/cache`
   ///
-  ///context.externalCacheDir
+  ///kotlin -> `context.externalCacheDir?.path`
   ///
   Future<String> getExternalCachePath() async {
     return await _channel.invokeMethod<String>('$_name/getExternalCachePath') ??
@@ -188,9 +206,28 @@ class AndroidAppUtil {
   }
 
   ///
-  ////`storage/emulated/0`
+  ///`/data/data/<your.package.name>/cache`
   ///
-  Future<String> getAppExternalPath() async {
+  ///kotlin -> `context.cacheDir.absolutePath`
+  ///
+  Future<String?> getAppCachePath() async {
+    return await _channel.invokeMethod<String>('$_name/getAppCachePath');
+  }
+
+  /// It Will Clean!.
+  ///
+  ///`/data/data/<your.package.name>/cache`
+  ///
+  ///kotlin -> `context.cacheDir.deleteRecursively()`
+  ///
+  Future<bool> cleanAppCache() async {
+    return await _channel.invokeMethod<bool>('$_name/cleanAppCache') ?? false;
+  }
+
+  ///
+  /// return `storage/emulated/0`
+  ///
+  String getAppExternalPath() {
     // return await _channel.invokeMethod<String>('$_name/getAppExternalPath') ??
     //     '';
     return '/storage/emulated/0';

@@ -10,7 +10,7 @@ abstract class TDatabase<T> {
   TDatabase({required this.root});
 
   Future<void> add(T value);
-  Future<List<T>> getAll({Map<String, dynamic>? query = const {}});
+  Future<List<T>> getAll({Map<String, dynamic>? query});
   Future<void> update(String id, T value);
   Future<void> delete(String id);
 
