@@ -362,7 +362,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.5.1"
+    version: "5.0.0"
   timeago:
     dependency: "direct main"
     description:
