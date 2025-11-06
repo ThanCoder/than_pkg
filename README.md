@@ -1,6 +1,20 @@
 # My personal Flutter plugin with support for both Android and Linux platforms
 
-## ThanPkg V4.5.3
+## ThanPkg V5.0.0
+
+## FFMpeg
+
+### I Only Work in Linux
+
+```bash
+sudo apt install ffmpeg
+```
+
+```Dart
+ThanPkg.linux.ffmpeg.audio.*;
+ThanPkg.linux.ffmpeg.video.*;
+ThanPkg.linux.ffmpeg.ffprob.*;
+```
 
 ## Android ABI
 

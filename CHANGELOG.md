@@ -1,5 +1,10 @@
 # 5.0.0
 
+## Breaking changes
+
+- Added `ThanPkg.linux.ffmpeg.audio.*`
+- Added `ThanPkg.linux.ffmpeg.video.*`
+- Added `ThanPkg.linux.ffmpeg.ffprob.*`
 - Changed `Future<Map<String, dynamic>> getDeviceInfo` to `Future<AndroidDeviceInfo> getDeviceInfo`
 - Added `ThanPkg.appUtil.getHostPath`
 - Added `ThanPkg.platform.getABI`
@@ -7,8 +12,8 @@
 - Added `ThanPkg.android.app.getABI`
 - Added `ThanPkg.android.app.getAppCachePath`
 - Added `ThanPkg.android.app.cleanAppCache`
-- Break Changed `TJsonDatabase<T>`
-- Break Changed `TDatabase<T>`
+- Breaking Changed `TJsonDatabase<T>`
+- Breaking Changed `TDatabase<T>`
 
 ## 4.5.3
 

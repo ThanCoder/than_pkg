@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:than_pkg/utils/f_path.dart';
-
 extension StringExtension on String {
   String toCaptalize() {
     if (isEmpty) return this;
@@ -21,6 +19,6 @@ extension StringExtension on String {
   }
 
   String pathJoin(String path, String name) {
-    return FPath.join(path, name);
+    return '$path${Platform.pathSeparator}$name';
   }
 }

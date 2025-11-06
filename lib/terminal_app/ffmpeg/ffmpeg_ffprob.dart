@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:than_pkg/terminal_app/ffmpeg/audio_metadata.dart';
 import 'package:than_pkg/terminal_app/ffmpeg/ffmpeg_process.dart';
 
 class FFmpegFFprob {
@@ -29,76 +27,6 @@ class FFmpegFFprob {
     }
 
     return jsonDecode(result.stdout);
-  }
-
-  ///
-  ///  ## Audio Metadata
-  ///
-  Future<AudioMetadata> getAudioMetadata(String audioPath) async {
-    //ffprobe -v quiet -show_entries format_tags -of json
-    final result = await ffprobeRun(
-      arguments: [
-        '-v',
-        'quiet',
-        '-show_entries',
-        'format_tags',
-        '-of',
-        'json',
-        audioPath,
-      ],
-    );
-
-    if (result.exitCode != 0) {
-      throw Exception('ffprobe failed: ${result.stderr}');
-    }
-
-    final jsonData = jsonDecode(result.stdout);
-
-    // format.tags ထဲက metadata ပဲ return လုပ်တာ
-    final tags = jsonData['format']?['tags'] as Map<String, dynamic>? ?? {};
-
-    return AudioMetadata.fromMap(tags);
-  }
-
-  ///
-  /// ## Audio Metadata Edit
-  ///
-  Future<void> editAudioMetadata({
-    required String inputPath,
-    required String outputPath,
-    required AudioMetadata metadata,
-    bool isOverride = true,
-  }) async {
-    final outFile = File(outputPath);
-    if (outFile.existsSync() && isOverride) {
-      await outFile.delete();
-    }
-
-    final args = <String>['-i', inputPath];
-
-    if (metadata.title != null) {
-      args.addAll(['-metadata', 'title=${metadata.title}']);
-    }
-    if (metadata.artist != null) {
-      args.addAll(['-metadata', 'artist=${metadata.artist}']);
-    }
-    if (metadata.album != null) {
-      args.addAll(['-metadata', 'album=${metadata.album}']);
-    }
-    if (metadata.genre != null) {
-      args.addAll(['-metadata', 'genre=${metadata.genre}']);
-    }
-    if (metadata.date != null) {
-      args.addAll(['-metadata', 'date=${metadata.date}']);
-    }
-    if (metadata.comment != null) {
-      args.addAll(['-metadata', 'comment=${metadata.comment}']);
-    }
-
-    // args.addAll(['-c', 'copy', outputPath]);
-    args.addAll(['-id3v2_version', '3', outputPath]);
-
-    await ffmpegRun(arguments: args);
   }
 
   ///
