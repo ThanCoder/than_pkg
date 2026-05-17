@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
@@ -16,6 +18,8 @@ export 'src/t_database/index.dart';
 export 'src/view/index.dart';
 export 'src/enums/index.dart';
 export 'src/types/index.dart';
+
+export 'src/extensions/index.dart';
 
 class ThanPkg implements ThanPkgInterface {
   //singleton
