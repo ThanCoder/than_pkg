@@ -1,0 +1,33 @@
+name: than_pkg
+description: My personal Flutter plugin with support for both Android and Linux platforms.
+homepage: https://github.com/ThanCoder/than_pkg_flutter_lib
+repository: https://github.com/ThanCoder/than_pkg_flutter_lib
+version: 5.1.0
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mime: ^2.0.0
+  package_info_plus: ^10.1.0
+  plugin_platform_interface: ^2.0.2
+  window_manager: ^0.5.1
+  timeago: ^3.2.2
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: than.plugin.than_pkg
+        pluginClass: ThanPkgPlugin
+      linux:
+        pluginClass: ThanPkgPlugin

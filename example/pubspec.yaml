@@ -1,0 +1,28 @@
+name: than_pkg_example
+description: "Demonstrates how to use the than_pkg plugin."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0
+
+environment:
+  sdk: ^3.6.1
+dependencies:
+  flutter:
+    sdk: flutter
+
+  than_pkg:
+    path: ../
+  cupertino_icons: ^1.0.8
+  window_manager: ^0.5.1
+  package_info_plus: ^10.1.0
+  mime: ^2.0.0
+  timeago: ^3.2.2
+  intl: ^0.20.2
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+flutter:
+  uses-material-design: true
