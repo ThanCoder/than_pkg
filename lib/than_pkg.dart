@@ -2,18 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:than_pkg/android_pkg/android_pkg.dart';
-import 'package:than_pkg/linux_pkg/linux_pkg.dart';
-import 'package:than_pkg/platforms/than_pkg_interface.dart';
-import 'package:than_pkg/platforms/than_pkg_android.dart';
-import 'package:than_pkg/platforms/than_pkg_linux.dart';
-import 'package:than_pkg/types/src_dest_type.dart';
-import 'package:than_pkg/utils/app_util.dart';
+import 'package:than_pkg/src/android_pkg/android_pkg.dart';
+import 'package:than_pkg/src/linux_pkg/linux_pkg.dart';
+import 'package:than_pkg/src/platforms/than_pkg_interface.dart';
+import 'package:than_pkg/src/platforms/than_pkg_android.dart';
+import 'package:than_pkg/src/platforms/than_pkg_linux.dart';
+import 'package:than_pkg/src/types/src_dist_type.dart';
+import 'package:than_pkg/src/utils/app_util.dart';
 import 'package:window_manager/window_manager.dart';
 
-export 'utils/index.dart';
-export 't_database/index.dart';
-export 'view/index.dart';
+export 'src/utils/index.dart';
+export 'src/t_database/index.dart';
+export 'src/view/index.dart';
+export 'src/enums/index.dart';
+export 'src/types/index.dart';
 
 class ThanPkg implements ThanPkgInterface {
   //singleton
@@ -438,7 +440,7 @@ class ThanPkg implements ThanPkgInterface {
 
   @override
   Future<void> genPdfThumbnail({
-    required List<SrcDestType> pathList,
+    required List<SrcDistType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) {
@@ -447,7 +449,7 @@ class ThanPkg implements ThanPkgInterface {
 
   @override
   Future<void> genVideoThumbnail({
-    required List<SrcDestType> pathList,
+    required List<SrcDistType> pathList,
     int iconSize = 300,
     bool isOverride = false,
   }) {

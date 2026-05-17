@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:than_pkg/view/t_video_controller.dart';
-import 'package:than_pkg/view/t_video_view.dart';
+import 'package:than_pkg/than_pkg.dart';
 
 class VideoScreen extends StatefulWidget {
   final String path;

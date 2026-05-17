@@ -2,6 +2,13 @@
 
 ## ThanPkg V5.1.0
 
+## Every Update Dev
+
+```yaml
+than_pkg:
+  git: https://github.com/ThanCoder/than_pkg_flutter_lib
+```
+
 ## FFMpeg
 
 ### I Only Work in Linux

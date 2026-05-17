@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print, unused_local_variable
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:than_pkg/than_pkg.dart';
-import 'package:than_pkg/types/installed_app.dart';
+
 
 void main() async {
   await ThanPkg.instance.init(
